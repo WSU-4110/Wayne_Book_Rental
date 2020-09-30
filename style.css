@@ -7,9 +7,9 @@ form {
 }
 
 body {                                    
- background-color: #556e3c;
+ background-color: #556e3c;   
  margin: 0 20% 0;
- font-family: Verdana, sans-serif;     <!-- style of the body -->
+ font-family: Verdana, sans-serif;     /* style of the body */
  font-size: 100%;     
 }
 
@@ -72,7 +72,7 @@ img.avatar {
   width: 300px;
   height: 230px;
   margin: 5% 3% 0;
-  <!-- margin: 24px 0 12px 0; -->
+  /* margin: 24px 0 12px 0; */
 }
 
 /* The "Forgot password" text */
