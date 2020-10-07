@@ -1,0 +1,24 @@
+{
+  "name": "wayne_book_rental",
+  "version": "1.0.0",
+  "description": "1. MD Bakhtiar R Akhib\r  2. Jainil Patel\r  3. AK Patel\r  4. George Esho\r  5. Mohamad Jad Baltaji",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WSU-4110/Wayne_Book_Rental.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WSU-4110/Wayne_Book_Rental/issues"
+  },
+  "homepage": "https://github.com/WSU-4110/Wayne_Book_Rental#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.8"
+  }
+}
