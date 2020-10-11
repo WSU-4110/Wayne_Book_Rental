@@ -14,8 +14,8 @@ let PostBook = new Schema({
     Publisher: {
         type: String
     },
-    YearPublished: {
-        type: Number
+    Edition: {
+        type: String
     },
     Subject: {
         type: String

@@ -15,7 +15,7 @@ router.post("/post", function(req, res, next){
         FName: req.body.fname,
         LName: req.body.lname,
         Publisher: req.body.Publisher,
-        YearPublished: req.body.YearPublished,
+        Edition: req.body.edition,
         Subject: req.body.Subject,
         Condition: req.body.condition,
         Isbn: req.body.ISBN,
