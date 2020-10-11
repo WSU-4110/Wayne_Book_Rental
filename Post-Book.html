@@ -7,33 +7,33 @@
 <link rel="stylesheet" href="style-login.css">
 </head>
 <body>
-<form action="action_page.php" method="post">
+<form action="/post" method="POST">
 <div class="imgcontainer">
     <img src="images/wayne.JPG" alt="Avatar" class="avatar">
   </div>
   
-  <div class="container">
+   <div class="container"> 
     <h1>Post</h1>
     <p>Please fill in this form to list a new book.</p>
     <hr>
 
     <label for="Title"><b>Title:</b></label>
-    <input type="text" placeholder="Enter book title" name="Title" required>
+    <input type="text" placeholder="Enter book title" name="title" required>
 
     <label for="Author first name"><b>Author first name:</b></label>
-    <input type="text" placeholder="Enter author first name" name="Author first name" required>
+    <input type="text" placeholder="Enter author first name" name="fname" required>
 	
 	<label for="Author last name"><b>Author last name:</b></label>
-    <input type="text" placeholder="Enter author last name" name="Author last name" required>
+    <input type="text" placeholder="Enter author last name" name="lname" required>
 
     <label for="Publisher"><b>Publisher:</b></label>
     <input type="text" placeholder="Enter publisher" name="Publisher" required>
 
     <label for="Year published"><b>Year published:</b></label>
-    <input type="text" placeholder="Enter year published" name="Year published" required>
+    <input type="text" placeholder="Enter year published" name="YearPublished" required>
 
     <label for="Book subject"><b>Book subject:</b></label>
-    <input type="text" placeholder="Enter book subject" name="Book subject" required>
+    <input type="text" placeholder="Enter book subject" name="Subject" required>
 	
 	<label for="Condition"><b>Book condition:</b></label>
 	<select name="condition" id="condition" required>
@@ -57,7 +57,7 @@
 	<br><br>
 
     <div class="clearfix">
-      <button type="submit" class="signupbtn">Submit</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </div>
 </form>

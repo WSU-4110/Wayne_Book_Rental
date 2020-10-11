@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose= require("mongoose");
+const route = require('./routes/post');
 
 const PORT=4000;
 const app = express(); /* Standard */
@@ -17,16 +18,34 @@ db.once('open', function() {
   // we're connected!
 });
 
+app.use(express.static(__dirname + '/'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
+var fs = require('fs');
 
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
   res.status(200).send("Home Page");
-});
+});*/
+
+/*app.get("/", (req, res) => {
+  res.writeHead(200, {'content-Type': 'text/html'});
+  var myReadStream = fs.createReadStream(__dirname + '/Log-in.html', 'utf8');
+  myReadStream.pipe(res);
+});*/
+
+app.get("/", (req, res) =>{
+  res.sendFile(__dirname + '/Log-in.html', 'utf8');
+})
+
+app.get('/post', route);
+app.post('/post', route);
+
 
 
 app.listen(PORT, () => {
     try {
-      console.log(`server started on port ${PORT} `);
+      console.log(`yo dawgs, server started on port ${PORT} `);
     } catch (error) {
       console.log(error);
     }
