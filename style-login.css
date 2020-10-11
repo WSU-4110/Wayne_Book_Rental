@@ -34,6 +34,18 @@ input[type=text], input[type=password] {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+}
+
+textarea  
+{   
+   width: 100%;
+   padding: 12px 20px;
+   margin: 8px 0;
+   display: inline-block;
+   border: 1px solid #ccc;
+   box-sizing: border-box;   
+   font-family:"Times New Roman", Times, serif;  
 }
 
 /* Set a style for all buttons */
