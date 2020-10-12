@@ -1,0 +1,120 @@
+@charset "utf-8";
+
+/* This styling page is for Sign-up */
+
+/* form {
+  border: 1px solid #f1f1f1;
+  background-color: #556e3c;
+  margin: auto;
+}
+*/
+
+p{
+  text-align: center;
+}
+
+header {
+  color: #fed8b1;
+  margin-top: 0;
+  text-align: center;
+  background-color: #8b0000;
+}
+
+h1 {
+ text-align: center;
+ font-family: serif, Georgia, "Marko one";
+ font-weight: normal;
+ text-transform: uppercase;
+ margin-top: 30px;
+ Font-size: 1.5em;
+ Text-shadow: .1em .1em .2em lightslategray;
+}
+
+body {
+ background-color: #556e3c;
+ margin: 0 30% 0;
+ font-family: Verdana, sans-serif;     /* style of the body */
+ font-size: 100%;
+}
+
+Footer{
+ Text-align: center;
+ margin: 10% 20% 0;
+
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #006400;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+.submitbutton{
+  padding: 16px;
+}
+
+.Signup{
+ Padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* useless for now but I kept it In case we use it */
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
