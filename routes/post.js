@@ -41,9 +41,11 @@ router.post("/post", upload, function(req, res, next){
         Description: req.body.message,
         Image: req.file.filename
     });
-    res.send(200);
     console.log(bookDetails);
-    bookDetails.save();
+    bookDetails.save(function(err, req1){
+        if(err) throw err;
+        else res.sendFile(path.join(__dirname ,  '../Thank-You.html'));
+    });
 
 })
 
