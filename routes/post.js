@@ -1,15 +1,34 @@
 const express = require('express');
+var multer = require('multer');
 const router = express.Router();
 const path = require('path');
 const PostBook = require('../models/post.model');
-//var book = PostBook.find({});
 
+router.use(express.static(__dirname + '/'));
+
+///////////////// For Uploading images /////////////////////////
+if (typeof localStorage === "undefined" || localStorage === null) {
+    const LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+  
+  var Storage= multer.diskStorage({
+    destination:"./uploads/",
+    filename:(req,file,cb)=>{
+      cb(null,file.fieldname+"_"+Date.now()+path.extname(file.originalname));
+    }
+  });
+  
+  var upload = multer({
+    storage:Storage
+  }).single('img');
+//////////////////////////////////////////////////////////////////
 
 router.get('/post', function(req, res, next){
     res.sendFile(path.join(__dirname ,  '../Post-Book.html'));
 })
 
-router.post("/post", function(req, res, next){
+router.post("/post", upload, function(req, res, next){
     var bookDetails = new PostBook({
         Title: req.body.title,
         FName: req.body.fname,
@@ -19,13 +38,12 @@ router.post("/post", function(req, res, next){
         Subject: req.body.Subject,
         Condition: req.body.condition,
         Isbn: req.body.ISBN,
-        Description: req.body.message
-
+        Description: req.body.message,
+        Image: req.file.filename
     });
     res.send(200);
     console.log(bookDetails);
     bookDetails.save();
-
 
 })
 

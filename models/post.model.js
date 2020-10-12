@@ -28,6 +28,9 @@ let PostBook = new Schema({
     },
     Description: {
         type: String
+    },
+    Image: {
+        type: String
     }
 
 });
