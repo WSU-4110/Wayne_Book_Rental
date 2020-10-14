@@ -1,0 +1,117 @@
+body {
+  background: #fafafa;
+  font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+}
+h2{
+    text-align: center
+}
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+.topnav-right {
+    float: right;
+}
+.btn {
+  border: none; /* Remove borders */
+  color: white; /* Add a text color */
+  padding: 14px 28px; /* Add some padding */
+  cursor: pointer; /* Add a pointer cursor on mouse-over */
+}
+
+.book {background-color: #4CAF50;} /* Green */
+.book:hover {background-color: #46a049;
+}
+.post-topbar {
+                float: left;
+                width: 100%;
+                padding: 23px 20px;
+                background-color: #fff;
+                border-top: 4px solid #e44d3a;
+                border-left: 1px solid #e4e4e4;
+                border-bottom: 1px solid #e4e4e4;
+                border-right: 1px solid #e4e4e4;
+                -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+                -moz-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+                -ms-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+                -o-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+                box-shadow: 0 0 1px rgba(0,0,0,0.24);
+                margin-bottom: 20px;
+            }
+.post-bar {
+                float: left;
+                width: 100%;
+                background-color: #fff;
+                border-left: 1px solid #e4e4e4;
+                border-right: 1px solid #e4e4e4;
+                border-bottom: 1px solid #e4e4e4;
+                margin-bottom: 20px;
+                padding: 20px;
+                box-shadow: 0px 2px #e4e4e4;
+            }
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+#sidepanel {
+  box-sizing: border-box;
+  display: inline-block;
+  padding-left: 1.5em;
+  vertical-align: top;
+  width: 29%;
+}
+
+#delay-time-select {
+  display: block;
+  margin-top: 5px;
+  width: 10em;
+}
+
+#main-content {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 250px;
+  width: 70%;
+}
+
+#restaurant-feed {
+  max-width: 100%;
+  width: 500px;
+}
+
+@media screen and (max-width: 560px) {
+  #main-content {
+    width: 100%;
+  }
+}
+Footer{
+ Text-align: center;
+ margin:  0;
+
+}
