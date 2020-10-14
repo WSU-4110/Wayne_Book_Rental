@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose= require("mongoose");
 const route = require('./routes/post');
+const AuthRoute = require('./routes/auth')
 
 const PORT=4000;
 const app = express(); /* Standard */
@@ -39,8 +40,10 @@ app.get("/", (req, res) =>{
 })
 
 app.get('/post', route);
+
 app.post('/post', route);
 
+app.use('/', AuthRoute);
 
 
 app.listen(PORT, () => {

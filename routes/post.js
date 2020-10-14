@@ -2,7 +2,10 @@ const express = require('express');
 var multer = require('multer');
 const router = express.Router();
 const path = require('path');
+
+
 const PostBook = require('../models/post.model');
+const authenticate = require('../middleware/authenticate')
 
 router.use(express.static(__dirname + '/'));
 
@@ -24,8 +27,9 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   }).single('img');
 //////////////////////////////////////////////////////////////////
 
-router.get('/post', function(req, res, next){
-    res.sendFile(path.join(__dirname ,  '../Post-Book.html'));
+router.get('/post', authenticate, function(req, res, next){
+    res.redirect('/post');
+    //res.sendFile(path.join(__dirname ,  '../Post-Book.html'));
 })
 
 router.post("/post", upload, function(req, res, next){
