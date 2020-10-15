@@ -33,6 +33,6 @@ let PostBook = new Schema({
         type: String
     }
 
-});
+}, {timestamps: true});
 var postbooks = mongoose.model('postbooks', PostBook);
 module.exports = postbooks;
