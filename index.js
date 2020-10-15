@@ -1,9 +1,11 @@
 //Adding dependencies
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose= require("mongoose");
-const route = require('./routes/post');
-const AuthRoute = require('./routes/auth')
+const PostRoute = require('./routes/post');
+const AuthRoute = require('./routes/auth');
+const HomeRoute = require('./routes/home');
 
 const PORT=4000;
 const app = express(); /* Standard */
@@ -22,29 +24,23 @@ db.once('open', function() {
 app.use(express.static(__dirname + '/'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({secret: 'verySecretValue'}));
 
 var fs = require('fs');
 
-/*app.get("/", (req, res) => {
-  res.status(200).send("Home Page");
-});*/
-
-/*app.get("/", (req, res) => {
-  res.writeHead(200, {'content-Type': 'text/html'});
-  var myReadStream = fs.createReadStream(__dirname + '/Log-in.html', 'utf8');
-  myReadStream.pipe(res);
-});*/
-
+/////////// App caliing the routes//////////////////
 app.get("/", (req, res) =>{
   res.sendFile(__dirname + '/Log-in.html', 'utf8');
 })
 
-app.get('/post', route);
+app.get('/post', PostRoute);
 
-app.post('/post', route);
+app.post('/post', PostRoute);
 
 app.use('/', AuthRoute);
 
+app.use('/', HomeRoute);
+////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
     try {

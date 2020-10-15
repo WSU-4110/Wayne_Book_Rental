@@ -2,6 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 const path = require('path');
+const authenticate = require('../middleware/authenticate')
 
 const register = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedPass){
@@ -14,14 +15,14 @@ const register = (req, res, next) => {
             fname: req.body.fname,
             lname: req.body.lname,
             email: req.body.email,
-            password: hashedPass
+            password: hashedPass,
+            phone: req.body.Phonenumber
         })
     
         user.save()
         .then(user => {
-            res.json({
-                message: 'User Added Successfully!'
-            })
+            res.redirect('/');
+            console.log('User added successfully!');
         })
         .catch(error => {
             res.json({
@@ -46,10 +47,9 @@ const login = (req, res, next) =>{
                 }
                 if(result){
                     let token = jwt.sign({name: user.name}, 'verySecretValue', {expiresIn: '1h'})
-                    res.json({
-                        message: 'Login Successful',
-                        token
-                    })
+                    //res.redirect('/home');
+                    res.sendFile(path.join(__dirname ,  '../feed_2.0.html'));
+                    console.log('Logged in successfully!');
                 }else{
                     res.json({
                         message: 'Password did not match!'

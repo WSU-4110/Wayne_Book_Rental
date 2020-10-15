@@ -28,8 +28,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 //////////////////////////////////////////////////////////////////
 
 router.get('/post', authenticate, function(req, res, next){
-    res.redirect('/post');
-    //res.sendFile(path.join(__dirname ,  '../Post-Book.html'));
+    res.sendFile(path.join(__dirname ,  '../Post-Book.html'));
 })
 
 router.post("/post", upload, function(req, res, next){
@@ -43,6 +42,7 @@ router.post("/post", upload, function(req, res, next){
         Condition: req.body.condition,
         Isbn: req.body.ISBN,
         Description: req.body.message,
+        Price: req.body.Price,
         Image: req.file.filename
     });
     console.log(bookDetails);
