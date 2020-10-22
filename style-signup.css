@@ -5,19 +5,27 @@
 form {
   border: 3px solid #f1f1f1; 
   background-color: #556e3c;
-  margin: 20% 10% 0;  
+  margin: 10% 15% 0;
 }
 
-body {                                    
+p{
+  text-align: center;
+}
+
+h1{
+  text-align: center;
+}
+
+body {
  background-color: #556e3c;
  Background-image: url("images/oldmain.jpg");
  background-repeat: no-repeat;
  background-size: auto;
  background-position: center;
- 
- margin: 0 35% 0; 
+
+ margin: 0 35% 0;
  font-family: Verdana, sans-serif;     /* style of the body */
- font-size: 100%;     
+ font-size: 100%;
 }
 
 Footer{
@@ -76,6 +84,10 @@ img.avatar {
   padding: 16px;
 }
 
+.submitbutton{
+  padding: 16px;
+}
+
 .Signup{
  Padding: 16px;
 }
@@ -96,4 +108,4 @@ span.psw {
   .cancelbtn {
     width: 100%;
   }
-} 
+}

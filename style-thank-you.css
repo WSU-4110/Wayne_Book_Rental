@@ -1,22 +1,15 @@
 @charset "utf-8";
 
-/* This styling page is for Log-in */
-
-form {
-  border: 3px solid #f1f1f1; 
-  background-color: #556e3c;
-  margin: 20% 20% 0;  
-}
+/* This styling page is for Thank-you */
 
 body {                                    
- background-color: #556e3c;
- Background-image: url("images/oldmain.jpg");
+ background-color: #f8f8f8;
  background-repeat: no-repeat;
  background-size: auto;
  background-position: center;
  
  margin: 0 35% 0; 
- font-family: Verdana, sans-serif;     <!-- style of the body -->
+ font-family: Verdana, sans-serif;     
  font-size: 100%;     
 }
 
