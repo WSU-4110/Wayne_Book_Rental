@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Feed </title>
+<link href="../feed.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="topnav">
+            <a class="active" href="#">Home</a>
+            <!-- <a href="Post-Book.html">Rental Form</a> -->
+            <a href="/post">Rental Form</a>
+            <!-- <a  href="Profile.html">Profile</a> -->
+            <a  href="/home">Profile</a>
+            <div class="topnav-right">
+                <a href="/">Logout</a>
+            </div>
+    </div>
+    <div type='container'>
+        <h2>Wayne Book Rental</h2>
+        <section id="main-content">
+            <div id="book-feed" role="feed"></div>
+        </section>
+        <div class="post-topbar">
+            <a href="../Post-Book.html"><button class="btn book" >Post Book</button></a>
+        </div>
+        <% books.forEach(function (PostBook) { %>
+        <div class ="post-bar">
+            <div class="row">
+                <div class="column">
+                    <a target="_blank" href="">
+                        <img src="../uploads/<%=PostBook.Image %>"" alt="book" style="width:260px; height: 290px;">
+                    </a>
+                </div>
+                <div class="column" style="margin-left:5%;">
+                    <h3 class="post-details"><%= PostBook.Title %></h3>
+                    <p class="post-details">Author: <%= PostBook.FName %> <%= PostBook.LName %></p>
+                    <p class="post-details">Publisher: <%= PostBook.Publisher %></p>
+                    <p class="post-details">Edition: <%= PostBook.Edition %></p>
+                    <p class="post-details">Subject: <%= PostBook.Subject %></p>
+                    <p class="post-details">ISBN: <%= PostBook.Isbn %></p>
+                    <p class="post-details">Condition: <%= PostBook.Condition %> </p>
+                    <p class="post-details">Description: <%= PostBook.Description %> </p>
+                    <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
+                </div>
+                </div>
+                
+                <div class ="column">
+                    <div class="btn-buy-details">
+                        <button class="btn book" > Book Rent</button>
+                    </div>
+                </div>   
+
+        </div>
+        <% }) %>
+        <!-- <div class ="post-bar">
+            <div class="row">
+                <div class="column">
+                    <a target="_blank" href="INTOALGO.png">
+                        <img src="INTOALGO.png" alt="book" style="width:260px; height:300px;">
+                    </a>
+                </div>
+                <div class ="column">
+                    <h3 class="post-details">Introduction to Algorithms</h3>
+                    <p class="post-details">Author: Thomas H. Cormen</p>
+                    <p class="post-details">Publisher: MIT Press</p>
+                    <p class="post-details">Edition: 3rd edition</p>
+                    <p class="post-details">ISBN-13: 9780262033848</p>
+                    <p class="post-details">ISBN-10: 0262033844</p>
+                    <p class="post-details">Price: $11.99</p>
+                </div>
+                
+            </div>
+            
+            <div class ="column">
+                    <div class="btn-buy-details">
+                        <button class="btn book" > Book Rent</button>
+                    </div>
+            </div>
+            
+            
+        </div>
+        <div class ="post-bar">
+            <div class="row">
+                <div class="column">
+                    <a target="_blank" href="Neuroscience.png">
+                        <img src="Neuroscience.png" alt="book" style="width:150px">
+                    </a>
+                </div>
+                <div class ="column">
+                    <h3 class="post-details">Neuroscience</h3>
+                    <p class="post-details">Author: Purves et al</p>
+                    <p class="post-details">Publisher: Sinauer Associates </p>
+                    <p class="post-details">Edition: 6th edition</p>
+                    <p class="post-details">ISBN-13: 9781605353807 </p>
+                    <p class="post-details">ISBN-10: 1605353809</p>
+                    <p class="post-details">Price: $10.99</p>
+                </div>
+                </div>
+                
+                <div class ="column">
+                    <div class="btn-buy-details">
+                        <button class="btn book" > Book Rent</button>
+                    </div>
+                </div>
+            
+        </div>
+    </div> -->
+    <footer class ="PostFooter">
+        <p><small>Proudly Build in Detroit  © 2020 Team BookKeepers. All Rights Reserved. </small></p>
+    </footer>
+</body>
+</html>
