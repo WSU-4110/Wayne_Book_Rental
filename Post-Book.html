@@ -5,13 +5,15 @@
 <title>Post-Book Wayne Rental</title>                          <!-- title of the website -->
 <link href = "http://fonts.googleapis.com/css?family=Marko+One" rel="stylesheet" type='text/css'>
 <link rel="stylesheet" href="Post_book.css">
+    
+    
 </head>
     <div class="topnav">
             <a href="feed_2.0.html">Home</a>
             <a class="active" href="Post-Book.html">Rental Form</a>
             <a  href="Profile.html">Profile</a>
             <div class="topnav-right">
-                <a href="#logout">Logout</a>
+                <a href="/">Logout</a>
             </div>
     </div>
 <body>
@@ -22,8 +24,8 @@
   </div>
   
    <div class="container"> 
-    <h1>Post</h1>
-    <p>Please fill in this form to list a new book.</p>
+    <h1 style="text-align: center;">Post</h1>
+    <p style="text-align: center;">Please fill in this form to list a new book.</p>
     <hr>
 
     <label for="Title"><b>Title:</b></label>
@@ -60,6 +62,11 @@
     <input type="file" id="img" name="img" accept="image/*">  
 
 	<br><br>
+	<label for="Rent Price"><b>Rent Price $</b></label>
+    <input type="number" min=1 step="any" placeholder="Enter price for rent" name="Price" required>
+	
+	<br> <br>
+	
 	<label for="desc"><b>Enter description:</b></label>
 	<textarea name="message" placeholder="Enter a description of the book" 
 	name="Description" rows="10" cols="35" required></textarea>

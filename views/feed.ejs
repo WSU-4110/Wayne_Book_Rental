@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <title>Feed </title>
-<link href="feed.css" rel="stylesheet">
+<link href="../feed.css" rel="stylesheet">
 
 </head>
 <body>
     <div class="topnav">
-            <a class="active" href="feed_2.0.html">Home</a>
+            <a class="active" href="#">Home</a>
             <!-- <a href="Post-Book.html">Rental Form</a> -->
             <a href="/post">Rental Form</a>
             <!-- <a  href="Profile.html">Profile</a> -->
@@ -23,23 +23,26 @@
             <div id="book-feed" role="feed"></div>
         </section>
         <div class="post-topbar">
-            <a href="Post-Book.html"><button class="btn book" >Post Book</button></a>
+            <a href="../Post-Book.html"><button class="btn book" >Post Book</button></a>
         </div>
+        <% books.forEach(function (PostBook) { %>
         <div class ="post-bar">
             <div class="row">
                 <div class="column">
-                    <!-- <a target="_blank" href="">
-                        <img src="" alt="book" style="width:150px">
-                    </a> -->
+                    <a target="_blank" href="">
+                        <img src="../uploads/<%=PostBook.Image %>"" alt="book" style="width:260px; height: 290px;">
+                    </a>
                 </div>
-                <!-- <div class="column">
-                    <h3 class="post-details"></h3>
-                    <p class="post-details">Author:</p>
-                    <p class="post-details">Publisher:</p>
-                    <p class="post-details">Edition: </p>
-                    <p class="post-details">ISBN-13: </p>
-                    <p class="post-details">ISBN-10:</p>
-                    <p class="post-details">Price:</p>
+                <div class="column" style="margin-left:5%;">
+                    <h3 class="post-details"><%= PostBook.Title %></h3>
+                    <p class="post-details">Author: <%= PostBook.FName %> <%= PostBook.LName %></p>
+                    <p class="post-details">Publisher: <%= PostBook.Publisher %></p>
+                    <p class="post-details">Edition: <%= PostBook.Edition %></p>
+                    <p class="post-details">Subject: <%= PostBook.Subject %></p>
+                    <p class="post-details">ISBN: <%= PostBook.Isbn %></p>
+                    <p class="post-details">Condition: <%= PostBook.Condition %> </p>
+                    <p class="post-details">Description: <%= PostBook.Description %> </p>
+                    <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
                 </div>
                 </div>
                 
@@ -47,16 +50,15 @@
                     <div class="btn-buy-details">
                         <button class="btn book" > Book Rent</button>
                     </div>
-                </div> -->
-            
-                
+                </div>   
 
         </div>
-        <div class ="post-bar">
+        <% }) %>
+        <!-- <div class ="post-bar">
             <div class="row">
                 <div class="column">
                     <a target="_blank" href="INTOALGO.png">
-                        <img src="INTOALGO.png" alt="book" style="width:150px">
+                        <img src="INTOALGO.png" alt="book" style="width:260px; height:300px;">
                     </a>
                 </div>
                 <div class ="column">
@@ -104,7 +106,7 @@
                 </div>
             
         </div>
-    </div>
+    </div> -->
     <footer class ="PostFooter">
         <p><small>Proudly Build in Detroit  © 2020 Team BookKeepers. All Rights Reserved. </small></p>
     </footer>

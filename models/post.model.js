@@ -29,6 +29,9 @@ let PostBook = new Schema({
     Description: {
         type: String
     },
+    Price: {
+        type: String
+    },
     Image: {
         type: String
     }
