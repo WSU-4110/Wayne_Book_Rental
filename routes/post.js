@@ -5,6 +5,8 @@ const path = require("path");
 
 const PostBook = require("../models/post.model");
 const authenticate = require("../middleware/authenticate");
+const checkUser = require("../middleware/checkUser");
+const { userInfo } = require("os");
 
 router.use(express.static(__dirname + "/"));
 
@@ -34,7 +36,7 @@ router.get("/post", authenticate, function (req, res, next) {
   res.sendFile(path.join(__dirname, "../Post-Book.html"));
 });
 
-router.post("/post", upload, function (req, res, next) {
+router.post("/post", upload, checkUser, function (req, res, next) {
   var bookDetails = new PostBook({
     Title: req.body.title,
     FName: req.body.fname,
@@ -46,7 +48,7 @@ router.post("/post", upload, function (req, res, next) {
     Isbn: req.body.ISBN,
     Description: req.body.message,
     Price: req.body.Price,
-    Image: req.file.filename,
+    Image: req.file.filename
   });
   console.log(bookDetails);
   bookDetails.save(function (err, req1) {
