@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset ="utf-8">
+<title>Update-Book Wayne Rental</title>                          <!-- title of the website -->
+<link href = "http://fonts.googleapis.com/css?family=Marko+One" rel="stylesheet" type='text/css'>
+<link rel="stylesheet" href="Post_book.css">
+    
+<script>
+
+</script>   
+</head>
+    <div class="topnav">
+            <a href="feed_2.0.html">Home</a>
+            <a class="active" href="Post-Book.html">Rental Form</a>
+            <a  href="Profile.html">Profile</a>
+            <div class="topnav-right">
+                <a href="/logout">Logout</a>
+            </div>
+    </div>
+<body>
+    
+<form action="/post" method="POST" enctype="multipart/form-data">
+<div class="imgcontainer">
+    <img src="images/wayne.JPG" alt="Avatar" class="avatar">
+  </div>
+  
+   <div class="container"> 
+    <h1 style="text-align: center;">Post</h1>
+    <p style="text-align: center;">Please fill in this form to list a new book.</p>
+    <hr>
+
+    <label for="Title"><b>Title:</b></label>
+    <input type="text" placeholder="Enter book title" name="title" required>
+
+    <label for="Author first name"><b>Author first name:</b></label>
+    <input type="text" placeholder="Enter author first name" name="fname" required>
+	
+	<label for="Author last name"><b>Author last name:</b></label>
+    <input type="text" placeholder="Enter author last name" name="lname" required>
+
+    <label for="Publisher"><b>Publisher:</b></label>
+    <input type="text" placeholder="Enter publisher" name="Publisher" required>
+
+    <label for="Book edition"><b>Book edition:</b></label>
+    <input type="text" placeholder="Enter the book edition (1st, 2nd, 3rd...)" name="edition" required>
+
+    <label for="Book subject"><b>Book subject:</b></label>
+    <input type="text" placeholder="Enter book subject" name="Subject" required>
+	
+	<label for="Condition"><b>Book condition:</b></label>
+	<select name="condition" id="condition" required>
+		<option value="new">New</option>
+		<option value="like_new">Like New</option>
+		<option value="used">Used</option>
+	</select>
+	
+	<br> <br>
+	
+    <label for="ISBN"><b>ISBN:</b></label>
+    <input type="text" placeholder="Enter ISBN" name="ISBN" required>
+	
+    <label for="img"><b>Select image:</b></label>
+    <input type="file" id="img" name="img" accept="image/*">  
+
+	<br><br>
+	<label for="Rent Price"><b>Rent Price $</b></label>
+    <input type="number" min=1 step="any" placeholder="Enter price for rent" name="Price" required>
+	
+	<br> <br>
+	
+	<label for="desc"><b>Enter description:</b></label>
+	<textarea name="message" placeholder="Enter a description of the book" 
+	name="Description" rows="10" cols="35" required></textarea>
+	<br><br>
+
+    <div class="clearfix">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+
+<footer class ="PostFooter">
+<p><small>Proudly Build in Detroit  © 2020 Team BookKeepers. All Rights Reserved. </small></p>
+</footer>
+</body>
+</html>
