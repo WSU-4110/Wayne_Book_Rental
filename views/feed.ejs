@@ -17,6 +17,31 @@
                 <a href="/logout">Logout</a>
             </div>
     </div>
+
+    <form action="/filter" id="filter" class="form-inline" method="post"  role="form">
+
+        <label for="subject">By Subject:</label>
+            <select class="form-control" name="fltrsubject">
+                <option value=""></option>
+                <option value="Math">Math</option>
+                <option value="English">English</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Physics">Physics</option>
+                <option value="Computer Science">Computer Science</option>
+            </select>
+        
+        <label for="condition">By Condition:</label>
+            <select class="form-control" name="fltrcondition">
+                <option value=""></option>
+                <option value="New">New</option>
+                <option value="Like New">Like New</option>
+                <option value="Chemistry">Used</option>
+            </select>
+        
+        <button type="submit">Submit</button>
+    </form>
+
     <div type='container'>
         <h2>Wayne Book Rental</h2>
         <section id="main-content">
@@ -25,6 +50,7 @@
         <div class="post-topbar">
             <a href="/post"><button class="btn book" >Post Book</button></a>
         </div>
+        <%if (books.length > 0){ %>
         <% books.forEach(function (PostBook) { %>
         <div class ="post-bar">
             <div class="row">
@@ -53,7 +79,9 @@
                 </div>   
 
         </div>
-        <% }) %>
+        <% })}else{ %>
+            <h3 style="text-align: center;">No Record Found</h3>
+            <% } %>
         <!-- <div class ="post-bar">
             <div class="row">
                 <div class="column">
