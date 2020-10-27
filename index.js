@@ -2,10 +2,12 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose= require("mongoose");
 const PostRoute = require('./routes/post');
 const AuthRoute = require('./routes/auth');
 const HomeRoute = require('./routes/home');
+const FeedRoute = require('./routes/feed');
 
 const PORT=4000;
 const app = express(); /* Standard */
@@ -23,8 +25,10 @@ db.once('open', function() {
 
 app.use(express.static(__dirname + '/'));
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({secret: 'verySecretValue'}));
+app.set('view engine', 'ejs');
 
 var fs = require('fs');
 
@@ -40,6 +44,9 @@ app.post('/post', PostRoute);
 app.use('/', AuthRoute);
 
 app.use('/', HomeRoute);
+
+app.use('/', FeedRoute);
+
 ////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
