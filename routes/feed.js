@@ -29,7 +29,7 @@ router.post("/filter", authenticate, function (req, res, next) {
     }
 
     PostBook.find(fltrParameter, function (err, data) {
-        res.render('feed', {
+        res.render('/feed', {
             books: data
         });
     }).sort({ "_id": -1 })
@@ -49,6 +49,23 @@ router.post("/search", authenticate, function (req, res, next) {
         });
     }).sort({ "_id": -1 })
 })
+router.post("/update", authenticate, function(req, res, next) {
+    var title = { Title: "Test"}
+    PostBook.find(fltrParameter, function (err, data) {
+        res.render("Post-BookV2", {
+            book: data
+        });
+    })
+})
+router.get("/update", authenticate, function (req, res, next) {
+    //res.redirect('/post');
+    var title = { Title: "Test"}
+    PostBook.find(title, function (err, data) {
+        res.render("Post-BookV2", {
+            book: data
+        });
+    })
+  });
 
 /*router.post("/search", async (req, res) => {
     const Title = req.body.title;
