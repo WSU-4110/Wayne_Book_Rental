@@ -29,7 +29,7 @@
     "mongoose": "^5.10.8",
     "multer": "^1.4.2",
     "node-localstorage": "^2.1.6",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.6",
     "popups": "^1.1.3"
   }
 }

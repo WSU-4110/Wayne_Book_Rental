@@ -47,8 +47,7 @@ router.post("/post", upload, checkUser, function (req, res, next) {
     Condition: req.body.condition,
     Isbn: req.body.ISBN,
     Description: req.body.message,
-    Price: req.body.Price,
-    Image: req.file.filename
+    Price: req.body.Price
   });
   console.log(bookDetails);
   bookDetails.save(function (err, req1) {
