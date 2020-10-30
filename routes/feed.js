@@ -41,7 +41,11 @@ router.post("/filter", authenticate, function (req, res, next) {
 router.post("/search", authenticate, function (req, res, next) {
     var title = req.body.title;
 
-    var fltrParameter = { Title: title }
+    if (title != '') {
+        var fltrParameter = { Title: title }
+    } else {
+        var fltrParameter = {}
+    }
 
     PostBook.find(fltrParameter, function (err, data) {
         res.render('feed', {
@@ -49,23 +53,5 @@ router.post("/search", authenticate, function (req, res, next) {
         });
     }).sort({ "_id": -1 })
 })
-
-/*router.post("/search", async (req, res) => {
-    const Title = req.body.title;
-
-    try {
-        const book = await PostBook.find({ Title });
-        if (!book) {
-            return res.status(404).send();
-        }
-        res.render('feed',{
-            books: Title
-        });
-
-    } catch (e) {
-        res.status(500).send()
-    }
-    
-})*/
 
 module.exports = router;
