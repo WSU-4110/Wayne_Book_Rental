@@ -63,8 +63,35 @@ body {
 .profile-info-value {
   display: table-cell;
   border-top: 1px dotted #d5e4f1;
+  color: black;
 }
-
+.head{
+    color: black;
+}
+.star{
+    color: goldenrod;
+    font-size: 2.0rem;
+    padding: 0 1rem;
+    
+}
+.star::before{
+    content: '\2606';
+    cursor: pointer;
+}
+.star.rated::before{
+    content: '\2605';
+}
+.stars{
+    counter-reset: rateme 0;
+    font-size: 2.0rem;
+    font-weight: 900;
+}
+.star.rated{
+    counter-increment: rateme 1;
+}
+.stars::after{
+    content: counter(rateme) '/5';
+}
 .profile-info-name {
   text-align: right;
   padding: 6px 10px 6px 4px;
