@@ -33,7 +33,10 @@ h2{
     float: right;
 }
 
-
+.search{
+  position: absolute; /*or fixed*/
+  right: 0px;
+}
 /* Style the form - display items horizontally */
 .form-inline {
   display: flex;

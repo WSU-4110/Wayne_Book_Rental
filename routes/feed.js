@@ -29,7 +29,7 @@ router.post("/filter", authenticate, function (req, res, next) {
     }
 
     PostBook.find(fltrParameter, function (err, data) {
-        res.render('/feed', {
+        res.render('feed', {
             books: data
         });
     }).sort({ "_id": -1 })

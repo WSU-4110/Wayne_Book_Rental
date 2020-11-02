@@ -2,6 +2,8 @@
 <html>
     <head>
         <title> Wayne Book-Rental</title>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link href="Profile.css" rel="stylesheet">
         <script>
             document.addEventListener('DOMContentLoaded' ,function(){
@@ -43,11 +45,11 @@
     </head>
     <body style="background-image:url(Background.jpeg)">
         <div class="topnav">
-            <a href="feed_2.0.html">Home</a>
-            <a href="Post-Book.html">Rental Form</a>
-            <a class="active" href="Profile.html">Profile</a>
+            <a href="/feed">Home</a>
+            <a href="/post">Rental Form</a>
+            <a class="active" href="/profile">Profile</a>
             <div class="topnav-right">
-                <a href="#logout">Logout</a>
+                <a href="/logout">Logout</a>
             </div>
         </div>
 
@@ -61,7 +63,7 @@
                 <h1 class="head" style="text-align: center;"> My Profile</h1>
                 <div style="text-align: center;">
                     <img class='img-circle profile-img' height=110 width=120 src='Images/'></div>
-                <div class="head" style="text-align: center;"><b>Welcome User</b></div>
+                <div class="head" style="text-align: center;"><b>Welcome <%= user.fname %> <%= user.lname %></b></div>
                 <br>
                 <div class="stars" data-rating = "0">
                     <span class="star">&nbsp;</span>
@@ -75,39 +77,24 @@
                     <div class="row">
                          <div class="profile-user-info">
                             <div class="profile-info-row">
-                                <div class="profile-info-name"> Username </div>
-
-                                <div class="profile-info-value">
-                                    <span>akpatel</span>
-                                </div>
-                            </div>
-                            <div class="profile-info-row">
                                 <div class="profile-info-name"> Firstname </div>
 
                                 <div class="profile-info-value">
-                                    <span>Ak</span>
+                                    <span><%= user.fname %></span>
                                 </div>
                             </div>
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Lastname </div>
 
                                 <div class="profile-info-value">
-                                    <span>Patel</span>
+                                    <span><%= user.lname %></span>
                                 </div>
                             </div>
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Email </div>
 
                                 <div class="profile-info-value">
-                                    <span>akpatel@bookrental.com</span>
-                                </div>
-                            </div>
-
-                            <div class="profile-info-row">
-                                <div class="profile-info-name"> Age </div>
-
-                                <div class="profile-info-value">
-                                    <span>25</span>
+                                    <span><%= user.email %></span>
                                 </div>
                             </div>
 
@@ -115,16 +102,12 @@
                                 <div class="profile-info-name"> Joined </div>
 
                                 <div class="profile-info-value">
-                                    <span>2010/06/20</span>
+                                    <span>10/29/2020</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="hr hr-8 dotted"></div>
-
-                        <div class="profile-user-info">
-                            <div class="profile-info-row">
-                                <div class="profile-info-name"> Website </div>
 
                                 <div class="profile-info-value">
                                     <a href="#" target="_blank"></a>
@@ -132,7 +115,58 @@
                             </div>
                         </div>
                     </div>         
-                </form>  
+                </form>
+                
+                <div type='container'>
+                    <h2>Your listing</h2>
+                    <section id="main-content">
+                        <div id="book-feed" role="feed"></div>
+                    </section>
+                    <%if (books.length > 0){ %>
+                    <% books.forEach(function (PostBook) { %>
+                    <div class ="post-bar">
+                        <div class="row">
+                            <div class="column">
+                                <a target="_blank" href="">
+                                    <img src="../uploads/<%=PostBook.Image %>"" alt="book" style="width:260px; height: 290px;">
+                                </a>
+                            </div>
+                            <div class="column" style="margin-left:5%;">
+                                <h3 class="post-details"><%= PostBook.Title %></h3>
+                                <p class="post-details">Author: <%= PostBook.FName %> <%= PostBook.LName %></p>
+                                <p class="post-details">Publisher: <%= PostBook.Publisher %></p>
+                                <p class="post-details">Edition: <%= PostBook.Edition %></p>
+                                <p class="post-details">Subject: <%= PostBook.Subject %></p>
+                                <p class="post-details">ISBN: <%= PostBook.Isbn %></p>
+                                <p class="post-details">Condition: <%= PostBook.Condition %> </p>
+                                <p class="post-details">Description: <%= PostBook.Description %> </p>
+                                <p class="post-details">Book Owner: <%= PostBook.OwnerFname %> <%= PostBook.OwnerLname %></p>
+                                <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
+                            </div>
+                            </div>
+                            
+                            <div class ="edit_column"> 
+                                <div class="btn-edit">
+                                    <a class="btn book" href="/edit/<%= PostBook._id %>">Edit</a> 
+                                    <a class="btn book" href="/delete/<%= PostBook._id %>" > Delete</a>
+                                </div>
+                            </div>  
+                            
+                            <!-- Profile page needs to be active so we can put edit button on user's posts from profile page as well, 
+                                and only the poster can edit the post-->
+                                <!--<div class ="edit_column"> 
+                                    <div class="btn-edit">
+                                        <a href="views/Post-BookV2.ejs">
+                                            <button class="btn book" > Edit</button>
+                                        </a>
+                                    </div>
+                                </div>-->
+            
+                    </div>
+                    <% })}else{ %>
+                        <h3 style="text-align: center;">No Record Found</h3>
+                        <% } %>
+
             </div>
         </div>
         <footer class ="PostFooter">

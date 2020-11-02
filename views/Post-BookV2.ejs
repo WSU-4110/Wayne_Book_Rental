@@ -4,7 +4,7 @@
 <meta charset ="utf-8">
 <title>Post-Book Wayne Rental</title>                          <!-- title of the website -->
 <link href = "http://fonts.googleapis.com/css?family=Marko+One" rel="stylesheet" type='text/css'>
-<link rel="stylesheet" href="Post_book.css">
+<link rel="stylesheet" href="../Post_book.css">
     
     
 </head>
@@ -18,65 +18,64 @@
     </div>
 <body>
     
-<form action="/update" method="POST" enctype="multipart/form-data">
+<form action="/edit/<%= books._id %>" method="POST" enctype="multipart/form-data">
 <div class="imgcontainer">
-    <img src="images/wayne.JPG" alt="Avatar" class="avatar">
+    <img src="../images/wayne.JPG" alt="Avatar" class="avatar">
   </div>
-  
+    <input type="hidden" name="id" value="<%= books._id %>">
    <div class="container"> 
-    <h1 style="text-align: center;">Post</h1>
-    <p style="text-align: center;">Please fill in this form to list a new book.</p>
+    <h1 style="text-align: center;">Edit Post</h1>
+    <p style="text-align: center;">Please make the necessay edits below.</p>
     <hr>
-    <% book.forEach(function (PostBook){ %>
     <label for="Title"><b>Title:</b></label>
-    <input type="text" placeholder="Enter book title" name="title" value="<%= PostBook.Title %>" required>
+    <input type="text" placeholder="Enter book title" name="Title" value="<%= books.Title %>" required>
 
     <label for="Author first name"><b>Author first name:</b></label>
-    <input type="text" placeholder="Enter author first name" name="fname" value="<%= PostBook.FName %>" required>
+    <input type="text" placeholder="Enter author first name" name="fname" value="<%= books.FName %>" required>
 	
 	<label for="Author last name"><b>Author last name:</b></label>
-    <input type="text" placeholder="Enter author last name" name="lname" value="<%= PostBook.LName %>" required>
+    <input type="text" placeholder="Enter author last name" name="lname" value="<%= books.LName %>" required>
 
     <label for="Publisher"><b>Publisher:</b></label>
-    <input type="text" placeholder="Enter publisher" name="Publisher" value="<%= PostBook.Publisher %>" required>
+    <input type="text" placeholder="Enter publisher" name="Publisher" value="<%= books.Publisher %>" required>
 
     <label for="Book edition"><b>Book edition:</b></label>
-    <input type="text" placeholder="Enter the book edition (1st, 2nd, 3rd...)" name="edition" value="<%= PostBook.Edition %>" required>
+    <input type="text" placeholder="Enter the book edition (1st, 2nd, 3rd...)" name="edition" value="<%= books.Edition %>" required>
 
     <label for="Book subject"><b>Book subject:</b></label>
-    <input type="text" placeholder="Enter book subject" name="Subject" value="<%= PostBook.Subject %>" required>
+    <input type="text" placeholder="Enter book subject" name="Subject" value="<%= books.Subject %>" required>
 	
 	<label for="Condition"><b>Book condition:</b></label>
 	<select name="condition" id="condition" required>
-		<option value="New">New</option>
-		<option value="Like New">Like New</option>
-		<option value="Used">Used</option>
+		<option value="New" <% if(books.Condition == "New"){ %> selected <% } %>>New</option>
+		<option value="Like New" <% if(books.Condition == "Like New"){ %> selected <% } %>>Like New</option>
+		<option value="Used" <% if(books.Condition == "Used"){ %> selected <% } %>>Used</option>
 	</select>
 	
 	<br> <br>
 	
     <label for="ISBN"><b>ISBN:</b></label>
-    <input type="text" placeholder="Enter ISBN" name="ISBN" value="<%= PostBook.Isbn %>" required>
+    <input type="text" placeholder="Enter ISBN" name="ISBN" value="<%= books.Isbn %>"  required>
 	
     <label for="img"><b>Select image:</b></label>
-    <input type="file" id="img" name="img" value="<%= PostBook.Imag %>" accept="image/*">  
+    <input type="file" id="img" name="img" value="<%= books.Image %>" accept="image/*">  
 
 	<br><br>
 	<label for="Rent Price"><b>Rent Price $</b></label>
-    <input type="number" min=1 step="any" placeholder="Enter price for rent" name="Price" value="<%= PostBook.Price %>" required>
+    <input type="number" min=1 step="any" placeholder="Enter price for rent" name="Price" value="<%= books.Price %>" required>
 	
 	<br> <br>
 	
 	<label for="desc"><b>Enter description:</b></label>
 	<textarea name="message" placeholder="Enter a description of the book" 
-	name="Description" rows="10" cols="35" value="<%= PostBook.Description %>" required></textarea>
+	name="Description" rows="10" cols="35" value="<%= books.Description %>" required></textarea>
 	<br><br>
 
     <div class="clearfix">
-      <button type="submit" class="btn btn-primary">Update</button>
+      <button type="submit" name="submit" value="submit" class="btn btn-primary">Update</button>
     </div>
   </div>
-  <% }) %>
+
 </form>
 
 <footer class ="PostFooter">

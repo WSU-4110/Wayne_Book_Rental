@@ -8,6 +8,7 @@ const PostRoute = require('./routes/post');
 const AuthRoute = require('./routes/auth');
 const HomeRoute = require('./routes/home');
 const FeedRoute = require('./routes/feed');
+const ProfileRoute = require('./routes/profile');
 
 const PORT=4000;
 const app = express(); /* Standard */
@@ -46,6 +47,8 @@ app.use('/', AuthRoute);
 app.use('/', HomeRoute);
 
 app.use('/', FeedRoute);
+
+app.use('/', ProfileRoute);
 
 ////////////////////////////////////////////////////
 
