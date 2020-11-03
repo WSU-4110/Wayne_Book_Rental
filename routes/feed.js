@@ -3,9 +3,10 @@ const router = express.Router();
 const path = require("path");
 const PostBook = require("../models/post.model");
 const authenticate = require('../middleware/authenticate');
+const checkUser = require("../middleware/checkUser");
 const { toASCII } = require("punycode");
 
-router.get("/feed", authenticate, function (req, res, next) {
+router.get("/feed", authenticate, checkUser, function (req, res, next) {
     PostBook.find({}, function (err, data) {
         res.render('feed', {
             books: data
@@ -14,7 +15,7 @@ router.get("/feed", authenticate, function (req, res, next) {
 
 });
 
-router.post("/filter", authenticate, function (req, res, next) {
+router.post("/filter", authenticate, checkUser, function (req, res, next) {
     var fltrsubject = req.body.fltrsubject;
     var fltrcondition = req.body.fltrcondition;
 
@@ -38,7 +39,7 @@ router.post("/filter", authenticate, function (req, res, next) {
 
 // GET BOOK BY TITLE
 
-router.post("/search", authenticate, function (req, res, next) {
+router.post("/search", authenticate, checkUser, function (req, res, next) {
     var title = req.body.title;
 
     if (title != '') {
@@ -53,7 +54,7 @@ router.post("/search", authenticate, function (req, res, next) {
         });
     }).sort({ "_id": -1 })
 })
-router.post("/update", authenticate, function(req, res, next) {
+router.post("/update", authenticate, checkUser, function(req, res, next) {
     var title = { Title: "Test"}
     var query = {
         Title: req.body.title
@@ -75,7 +76,7 @@ router.post("/update", authenticate, function(req, res, next) {
         }
     })
 })
-router.get("/update", authenticate, function (req, res, next) {
+router.get("/update", authenticate, checkUser, function (req, res, next) {
     //res.redirect('/post');
     var title = { Title: "New test"}
     PostBook.find(title, function (err, data) {

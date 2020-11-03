@@ -31,7 +31,7 @@ var upload = multer({
 }).single("img");
 //////////////////////////////////////////////////////////////////
 
-router.get("/post", authenticate, function (req, res, next) {
+router.get("/post", authenticate, checkUser, function (req, res, next) {
   //res.redirect('/post');
   res.sendFile(path.join(__dirname, "../Post-Book.html"));
 });

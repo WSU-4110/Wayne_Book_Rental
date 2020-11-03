@@ -18,11 +18,11 @@
     </div>
 <body>
     
-<form action="/edit/<%= books._id %>" method="POST" enctype="multipart/form-data">
+<form action="/edit/" method="POST" >
 <div class="imgcontainer">
     <img src="../images/wayne.JPG" alt="Avatar" class="avatar">
   </div>
-    <input type="hidden" name="id" value="<%= books._id %>">
+    <input type="hidden" name="_id" value="<%= books._id %>">
    <div class="container"> 
     <h1 style="text-align: center;">Edit Post</h1>
     <p style="text-align: center;">Please make the necessay edits below.</p>

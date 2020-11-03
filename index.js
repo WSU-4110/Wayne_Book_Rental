@@ -14,8 +14,6 @@ const PORT=4000;
 const app = express(); /* Standard */
 mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});// Connects to local database
 
-
-
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));

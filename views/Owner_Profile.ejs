@@ -4,7 +4,7 @@
         <title> Wayne Book-Rental</title>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link href="Profile.css" rel="stylesheet">
+        <link href="../Profile.css" rel="stylesheet">
         <script>
             document.addEventListener('DOMContentLoaded' ,function(){
                 let stars =document.querySelectorAll('.star');
@@ -43,7 +43,7 @@
         
         </script>
     </head>
-    <body style="background-image:url(Background.jpeg)">
+    <body style="background-image:url(../Background.jpeg)">
         <div class="topnav">
             <a href="/feed">Home</a>
             <a href="/post">Rental Form</a>
@@ -56,14 +56,10 @@
 
         <div class = "container">
 
-            <form action = "" method = "post">
-                <button class ="btn btn-default" style="float:right; width:70px;" name="submit1">EDIT</button>
-            </form>
             <div class = "wrapper">
-                <h1 class="head" style="text-align: center;"> <%= user.fname %> <%= user.lname %></h1>
+                <h1 class="head" style="text-align: center;"> <%= Owner.fname %> <%= Owner.lname %></h1>
                 <div style="text-align: center;">
-                    <img class='img-circle profile-img' height=110 width=120 src='Images/default.png'></div>
-                <!-- <div class="head" style="text-align: center;"><b>Welcome <%= user.fname %> <%= user.lname %></b></div> -->
+                    <img class='img-circle profile-img' height=110 width=120 src='../Images/default.png'></div>
                 <br>
                 <div class="stars" data-rating = "0" style="text-align: center;">
                     <span class="star">&nbsp;</span>
@@ -80,21 +76,21 @@
                                 <div class="profile-info-name" > Firstname </div>
 
                                 <div class="profile-info-value">
-                                    <span><%= user.fname %></span>
+                                    <span><%= Owner.fname %></span>
                                 </div>
                             </div>
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Lastname </div>
 
                                 <div class="profile-info-value">
-                                    <span><%= user.lname %></span>
+                                    <span><%= Owner.lname %></span>
                                 </div>
                             </div>
                             <div class="profile-info-row">
                                 <div class="profile-info-name"> Email </div>
 
                                 <div class="profile-info-value">
-                                    <span><%= user.email %></span>
+                                    <span><%= Owner.email %></span>
                                 </div>
                             </div>
 
@@ -118,7 +114,7 @@
                 </form>
                 
                 <div type='container'>
-                    <h2>Your listing</h2>
+                    <h2><%= Owner.fname %>'s listing</h2>
                     <section id="main-content">
                         <div id="book-feed" role="feed"></div>
                     </section>
@@ -147,23 +143,9 @@
                             
                             <div class ="edit_column"> 
                                 <div class="btn-edit">
-                                    <!-- <a class="btn book" href="/edit/<%= PostBook._id %>">Edit</a>  -->
-                                    <!-- <a class="btn book" href="/delete/<%= PostBook._id %>" > Delete</a> -->
-                                    <a class="btn btn-primary btn-lg" href="/edit/<%= PostBook._id %>"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-lg" href="/delete/<%= PostBook._id %>"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-success btn-s" href="#">Rent Book</i></a>
                                 </div>
                             </div>  
-                            
-                            <!-- Profile page needs to be active so we can put edit button on user's posts from profile page as well, 
-                                and only the poster can edit the post-->
-                                <!--<div class ="edit_column"> 
-                                    <div class="btn-edit">
-                                        <a href="views/Post-BookV2.ejs">
-                                            <button class="btn book" > Edit</button>
-                                        </a>
-                                    </div>
-                                </div>-->
-            
                     </div>
                     <% })}else{ %>
                         <h3 style="text-align: center;">No Record Found</h3>

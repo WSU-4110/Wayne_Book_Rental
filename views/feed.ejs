@@ -16,6 +16,7 @@
             <!-- <a  href="Profile.html">Profile</a> -->
             <a  href="/profile">Profile</a>
             <div class="topnav-right">
+                <a href="/profile">Welcome <%= user.fname %> <%= user.lname %></a>
                 <a href="/logout">Logout</a>
             </div>
     </div>
@@ -31,7 +32,7 @@
 
     <form action="/filter" id="filter" class="form-inline" method="post"  role="form">
 
-        <label for="subject">By Subject:</label>
+        <label for="subject">Filter By Subject:</label>
             <select class="form-control" name="fltrsubject">
                 <option value=""></option>
                 <option value="Math">Math</option>
@@ -42,7 +43,7 @@
                 <option value="Computer Science">Computer Science</option>
             </select>
         
-        <label for="condition">By Condition</label>
+        <label for="condition">Filter By Condition</label>
             <select class="form-control" name="fltrcondition">
                 <option value=""></option>
                 <option value="New">New</option>
@@ -78,7 +79,7 @@
                     <p class="post-details">ISBN: <%= PostBook.Isbn %></p>
                     <p class="post-details">Condition: <%= PostBook.Condition %> </p>
                     <p class="post-details">Description: <%= PostBook.Description %> </p>
-                    <p class="post-details">Book Owner: <%= PostBook.OwnerFname %> <%= PostBook.OwnerLname %></p>
+                    <p class="post-details">Book Owner: <a href="/ownerprofile/<%=PostBook.OwnerID%>">  <%= PostBook.OwnerFname %> <%= PostBook.OwnerLname %></a></p>
                     <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
                 </div>
                 </div>
@@ -90,13 +91,13 @@
                 </div>   
                 <!-- Profile page needs to be active so we can put edit button on user's posts from profile page as well, 
                     and only the poster can edit the post-->
-                    <div class ="edit_column"> 
+                    <!-- <div class ="edit_column"> 
                         <div class="btn-edit">
                             <a href="views/Post-BookV2.ejs">
                                 <button class="btn book" > Edit</button>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
 
         </div>
         <% })}else{ %>

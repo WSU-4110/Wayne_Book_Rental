@@ -4,8 +4,10 @@ const router = express.Router();
 const path = require("path");
 
 const PostBook = require("../models/post.model");
+const UserModel = require("../models/User");
 const authenticate = require("../middleware/authenticate");
 const checkUser = require("../middleware/checkUser");
+const { json } = require("body-parser");
 
 router.get("/profile", authenticate, checkUser, function (req, res, next) {
 
@@ -40,35 +42,12 @@ router.get('/edit/:id', function(req, res, next){
     })
 })
 
-router.post('/edit/:id', function(req, res, next){
+router.post("/edit/", authenticate, checkUser, function(req, res, next){
     
-    var id = req.body.id;
-
-    console.log(id);
-
-    // PostBook.findOneAndUpdate({_id: Id}, {
-    //     Title: req.body.Title,
-    //     FName: req.body.fname,
-    //     LName: req.body.lname,
-    //     Publisher: req.body.Publisher,
-    //     Edition: req.body.edition,
-    //     Subject: req.body.Subject,
-    //     Condition: req.body.condition,
-    //     Isbn: req.body.ISBN,
-    //     Description: req.body.message,
-    //     Price: req.body.Price
-    // }, {useFindAndModify: false})
-    // .then(inst => {
-    //     console.log(inst);
-    // })
-    // .catch(err => {
-    // console.log("error!", err);
-    // });
-
-    // res.redirect('/profile');
+    var id = req.body._id;
 
     var edit = PostBook.findByIdAndUpdate(id,{
-        Title: req.body.title,
+        Title: req.body.Title,
         FName: req.body.fname,
         LName: req.body.lname,
         Publisher: req.body.Publisher,
@@ -86,6 +65,38 @@ router.post('/edit/:id', function(req, res, next){
     })
 })
 
+router.get('/ownerprofile/:id', function(req, res, next){
+    var id = req.params.id;
 
+    var Ownerdata = UserModel.findById(id);
+    var Bookdata = PostBook.find({OwnerID: id});
+
+    Ownerdata.exec(function(err, data){
+        if(err) throw err;
+        Bookdata.exec(function(err, bookdata){
+            if(err) throw err;
+            res.render('Owner_Profile',{
+                Owner: data,
+                books: bookdata
+            });
+            
+        })
+
+    })
+
+    // UserModel.findById(id, function (err, data){
+    //     var Ownerdata = response.write(JSON.stringify(data));
+    //     var Ownerjson = 
+    // })
+
+    // PostBook.findById(id, function (err, data) {
+    //     var Bookdata = data;
+    // })
+
+    // res.render('Owner_Profile',{
+    //     Owner: Ownerdata,
+    //     books: Bookdata
+    // });
+})
 
 module.exports = router;
