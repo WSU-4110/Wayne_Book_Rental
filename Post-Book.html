@@ -4,13 +4,9 @@
 <meta charset ="utf-8">
 <title>Post-Book Wayne Rental</title>                          <!-- title of the website -->
 <link href = "http://fonts.googleapis.com/css?family=Marko+One" rel="stylesheet" type='text/css'>
-<<<<<<< HEAD
-<link rel="stylesheet" href="style-form.css">
-=======
 <link rel="stylesheet" href="Post_book.css">
     
     
->>>>>>> Development
 </head>
     <div class="topnav">
             <a href="feed_2.0.html">Home</a>
@@ -21,18 +17,6 @@
             </div>
     </div>
 <body>
-<<<<<<< HEAD
-
-<header><h1>Form to list the book</h1></header>
-<form action="action_page.php" method="post">
-<!-- <div class="imgcontainer">
-    <img src="images/wayne.JPG" alt="Avatar" class="avatar">
-  </div> -->
-
-  <div class="container">
-
-    <p>Please fill in this form to list a new book.</p>
-=======
     
 <form action="/post" method="POST" enctype="multipart/form-data">
 <div class="imgcontainer">
@@ -42,7 +26,6 @@
    <div class="container"> 
     <h1 style="text-align: center;">Post</h1>
     <p style="text-align: center;">Please fill in this form to list a new book.</p>
->>>>>>> Development
     <hr>
 
     <label for="Title"><b>Title:</b></label>
@@ -50,28 +33,13 @@
 
     <label for="Author first name"><b>Author first name:</b></label>
     <input type="text" placeholder="Enter author first name" name="fname" required>
-<<<<<<< HEAD
-
-	  <label for="Author last name"><b>Author last name:</b></label>
-=======
 	
 	<label for="Author last name"><b>Author last name:</b></label>
->>>>>>> Development
     <input type="text" placeholder="Enter author last name" name="lname" required>
 
     <label for="Publisher"><b>Publisher:</b></label>
     <input type="text" placeholder="Enter publisher" name="Publisher" required>
 
-<<<<<<< HEAD
-    <label for="Year published"><b>Year published:</b></label>
-    <input type="text" placeholder="Enter year published" name="edition" required>
-
-    <label for="Book subject"><b>Book subject:</b></label>
-    <input type="text" placeholder="Enter book subject" name="subject" required>
-
-  	<label for="Condition"><b>Book condition:</b></label>
-	  <select name="condition" id="condition" required>
-=======
     <label for="Book edition"><b>Book edition:</b></label>
     <input type="text" placeholder="Enter the book edition (1st, 2nd, 3rd...)" name="edition" required>
 
@@ -80,7 +48,6 @@
 	
 	<label for="Condition"><b>Book condition:</b></label>
 	<select name="condition" id="condition" required>
->>>>>>> Development
 		<option value="new">New</option>
 		<option value="like_new">Like New</option>
 		<option value="used">Used</option>
@@ -95,14 +62,6 @@
     <input type="file" id="img" name="img" accept="image/*">
 
 	<br><br>
-<<<<<<< HEAD
-	<b>Enter description:</b>
-	<textarea name="instructions" rows="4" cols="42" maxlength="400" id="form-story" placeholder="No more than 400 characters long"></textarea>
-	<br><br>
-
-  <div class="clearfix">
-      <button type="submit" class="signupbtn">Submit</button>
-=======
 	<label for="Rent Price"><b>Rent Price $</b></label>
     <input type="number" min=1 step="any" placeholder="Enter price for rent" name="Price" required>
 	
@@ -115,7 +74,6 @@
 
     <div class="clearfix">
       <button type="submit" class="btn btn-primary">Submit</button>
->>>>>>> Development
     </div>
   </div>
 </form>
