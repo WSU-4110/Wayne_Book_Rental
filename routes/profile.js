@@ -83,20 +83,6 @@ router.get('/ownerprofile/:id', function(req, res, next){
         })
 
     })
-
-    // UserModel.findById(id, function (err, data){
-    //     var Ownerdata = response.write(JSON.stringify(data));
-    //     var Ownerjson = 
-    // })
-
-    // PostBook.findById(id, function (err, data) {
-    //     var Bookdata = data;
-    // })
-
-    // res.render('Owner_Profile',{
-    //     Owner: Ownerdata,
-    //     books: Bookdata
-    // });
 })
 
 module.exports = router;

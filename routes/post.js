@@ -33,7 +33,8 @@ var upload = multer({
 
 router.get("/post", authenticate, checkUser, function (req, res, next) {
   //res.redirect('/post');
-  res.sendFile(path.join(__dirname, "../Post-Book.html"));
+  //res.sendFile(path.join(__dirname, "../Post-Book.html"));
+  res.render('Post-Book');
 });
 
 router.post("/post", upload, checkUser, function (req, res, next) {
