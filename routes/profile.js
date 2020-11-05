@@ -99,4 +99,23 @@ router.get('/ownerprofile/:id', function(req, res, next){
     // });
 })
 
+router.get('/reportprofile/:id', authenticate, checkUser, function (req, res, next) {
+
+    //res.render('report');
+
+    var ID = req.params.id;
+
+    UserModel.findById(ID,function(err,data){
+        res.render('reportpage',{
+            Owner: data
+
+        })
+    })
+
+
+});
+
+router.get('/report', authenticate, function(req, res, next){
+    res.sendFile(path.join(__dirname ,  '../mail_handler.php'));
+})
 module.exports = router;
