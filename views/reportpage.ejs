@@ -107,22 +107,28 @@
 			}
 		}
 	</style>
+	<script>
+		function alerttext(){
+			alert("Your message was sent to the authority. A member will investigate and reachout to you ASAP");
+		}
+	</script>
 </head>
 
 <body>
 	<div class="main">
 		<div class="info">Report Users!</div>
-		<form action="../mail_handler.php" method="post" name="form" class="form-box">
-			<label for="name">Name</label><br>
+		<form action="/report" method="post" name="form" class="form-box">
+			<label for="name">Name of the user reporting</label><br>
 			<input type="text" name="name" class="inp" placeholder="Enter Your Name"
 				value="<%= Owner.fname %> <%= Owner.lname %>"><br>
 
 			<input type="hidden" name="ID" value="<%= Owner._id %>">
 			<input type="hidden" name="username" value="<%= user.fname %> <%= user.lname %>">
+			<input type="hidden" name="senderemail" value="<%= user.email %>">
 
 			<label for="message">Message</label><br>
 			<textarea name="msg" class="msg-box" placeholder="Enter Your Message Here..." required></textarea><br>
-			<input type="submit" name="submit" value="Send" class="sub-btn">
+			<input type="submit" name="submit" value="Send" class="sub-btn" onclick="alerttext()">
 		</form>
 	</div>
 	<footer class="PostFooter">
