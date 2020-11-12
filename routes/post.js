@@ -31,9 +31,10 @@ var upload = multer({
 }).single("img");
 //////////////////////////////////////////////////////////////////
 
-router.get("/post", authenticate, function (req, res, next) {
+router.get("/post", authenticate, checkUser, function (req, res, next) {
   //res.redirect('/post');
-  res.sendFile(path.join(__dirname, "../Post-Book.html"));
+  //res.sendFile(path.join(__dirname, "../Post-Book.html"));
+  res.render('Post-Book');
 });
 
 router.post("/post", upload, checkUser, function (req, res, next) {
@@ -48,7 +49,10 @@ router.post("/post", upload, checkUser, function (req, res, next) {
     Isbn: req.body.ISBN,
     Description: req.body.message,
     Price: req.body.Price,
-    Image: req.file.filename
+    Image: req.file.filename,
+    OwnerFname: res.locals.user.fname,
+    OwnerLname: res.locals.user.lname,
+    OwnerID: res.locals.user._id
   });
   console.log(bookDetails);
   bookDetails.save(function (err, req1) {
@@ -56,5 +60,8 @@ router.post("/post", upload, checkUser, function (req, res, next) {
     else res.sendFile(path.join(__dirname, "../Thank-You.html"));
   });
 });
+
+
+
 
 module.exports = router;

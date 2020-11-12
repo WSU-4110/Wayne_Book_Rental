@@ -4,6 +4,8 @@
 <meta charset="utf-8" />
 <title>Feed </title>
 <link href="../feed.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 </head>
 <body>
@@ -12,15 +14,25 @@
             <!-- <a href="Post-Book.html">Rental Form</a> -->
             <a href="/post">Rental Form</a>
             <!-- <a  href="Profile.html">Profile</a> -->
-            <a  href="/home">Profile</a>
+            <a  href="/profile">Profile</a>
             <div class="topnav-right">
+                <a href="/profile">Welcome <%= user.fname %> <%= user.lname %></a>
                 <a href="/logout">Logout</a>
             </div>
     </div>
 
+
+    <form action="/search" id="search" class="search" method="post"  role="form">
+
+        <label for="subject" placeholder="Search By Title"></label>
+           <input type="text" id="title" placeholder="Search By Title" name="title">
+        
+           <a class="btn btn-success btn-s" href="#" onclick="document.getElementById('search').submit()"><i class="fa fa-search"></i></a>
+    </form>
+
     <form action="/filter" id="filter" class="form-inline" method="post"  role="form">
 
-        <label for="subject">By Subject:</label>
+        <label for="subject">Filter By Subject:</label>
             <select class="form-control" name="fltrsubject">
                 <option value=""></option>
                 <option value="Math">Math</option>
@@ -31,15 +43,14 @@
                 <option value="Computer Science">Computer Science</option>
             </select>
         
-        <label for="condition">By Condition:</label>
+        <label for="condition">Filter By Condition</label>
             <select class="form-control" name="fltrcondition">
                 <option value=""></option>
                 <option value="New">New</option>
                 <option value="Like New">Like New</option>
                 <option value="Chemistry">Used</option>
             </select>
-        
-        <button type="submit">Submit</button>
+        <a class="btn btn-success btn-s" href="#" onclick="document.getElementById('filter').submit()"><i class="fa fa-filter"></i></a>
     </form>
 
     <div type='container'>
@@ -68,6 +79,7 @@
                     <p class="post-details">ISBN: <%= PostBook.Isbn %></p>
                     <p class="post-details">Condition: <%= PostBook.Condition %> </p>
                     <p class="post-details">Description: <%= PostBook.Description %> </p>
+                    <p class="post-details">Book Owner: <a href="/ownerprofile/<%=PostBook.OwnerID%>">  <%= PostBook.OwnerFname %> <%= PostBook.OwnerLname %></a></p>
                     <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
                 </div>
                 </div>
@@ -77,6 +89,15 @@
                         <button class="btn book" > Book Rent</button>
                     </div>
                 </div>   
+                <!-- Profile page needs to be active so we can put edit button on user's posts from profile page as well, 
+                    and only the poster can edit the post-->
+                    <!-- <div class ="edit_column"> 
+                        <div class="btn-edit">
+                            <a href="views/Post-BookV2.ejs">
+                                <button class="btn book" > Edit</button>
+                            </a>
+                        </div>
+                    </div> -->
 
         </div>
         <% })}else{ %>

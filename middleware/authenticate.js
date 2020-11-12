@@ -13,7 +13,7 @@ const authenticate = (req, res, next) => {
                 res.redirect('/');
             }
             else{
-                console.log(decodedToken);
+                //console.log(decodedToken);
                 next();
             }
         })

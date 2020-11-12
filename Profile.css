@@ -63,8 +63,35 @@ body {
 .profile-info-value {
   display: table-cell;
   border-top: 1px dotted #d5e4f1;
+  color: black;
 }
-
+.head{
+    color: black;
+}
+.star{
+    color: goldenrod;
+    font-size: 2.0rem;
+    padding: 0 1rem;
+    
+}
+.star::before{
+    content: '\2606';
+    cursor: pointer;
+}
+.star.rated::before{
+    content: '\2605';
+}
+.stars{
+    counter-reset: rateme 0;
+    font-size: 2.0rem;
+    font-weight: 900;
+}
+.star.rated{
+    counter-increment: rateme 1;
+}
+.stars::after{
+    content: counter(rateme) '/5';
+}
 .profile-info-name {
   text-align: right;
   padding: 6px 10px 6px 4px;
@@ -115,3 +142,111 @@ Footer {
   text-align: center;
   margin: 80 0;
 }
+
+/* Added for showing the listing */
+
+h2{
+  text-align: center
+}
+
+
+.btn {
+  border: none; /* Remove borders */
+  color: white; /* Add a text color */
+  padding: 14px 28px; /* Add some padding */
+  cursor: pointer; /* Add a pointer cursor on mouse-over */
+}
+
+.btn-details{
+  text-align: left;
+  background-color: #4CAF50;
+}
+.btn-buy-details{
+  text-align: right; 
+  margin-left: 137%;
+  
+}
+.btn-edit{
+text-align: center; 
+margin-left: 0%;
+}
+
+.btn-book{
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-book:hover{
+  background-color: lightgreen;
+}
+
+
+
+.book {background-color: #4CAF50;} /* Green */
+.book:hover {background-color: #46a049;
+}
+.column {
+  float: left;
+  width: 15%; 
+  padding: 10px;
+  margin-left: 30%;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 160px;
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+#main-content {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 250px;
+  width: 70%;
+}
+
+#book-feed {
+  max-width: 100%;
+  width: 500px;
+}
+.post-topbar {
+  float: left;
+  width: 100%;
+  padding: 23px 20px;
+  background-color: #fff;
+  border-top: 4px solid #e44d3a;
+  border-left: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
+  -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+  -moz-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+  -ms-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+  -o-box-shadow: 0 0 1px rgba(0,0,0,0.24);
+  box-shadow: 0 0 1px rgba(0,0,0,0.24);
+  margin-bottom: 20px;
+}
+.post-bar {
+  float: left;
+  width: 100%;
+  background-color: #fff;
+  border-left: 1px solid #e4e4e4;
+  border-right: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 20px;
+  padding: 7px 0px 0px;
+  box-shadow: 0px 2px #e4e4e4;
+
+}
+
+
