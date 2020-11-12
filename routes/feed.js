@@ -40,8 +40,12 @@ router.post("/filter", authenticate, function (req, res, next) {
 
 router.post("/search", authenticate, function (req, res, next) {
     var title = req.body.title;
-
     var fltrParameter = { Title: title }
+
+    if(req.body.title== null)
+    {
+        console.log("Nothing was entered to field")
+    }
 
     PostBook.find(fltrParameter, function (err, data) {
         res.render('feed', {
