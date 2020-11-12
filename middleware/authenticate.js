@@ -10,15 +10,19 @@ const authenticate = (req, res, next) => {
         jwt.verify(token, 'verySecretValue', (err, decodedToken) =>{
             if(err){
                 console.log(err.message);
+                res.locals.user = null;
                 res.redirect('/');
             }
             else{
                 console.log(decodedToken);
+                let user = await User.findById(decodedToken.id);
+                req.session.user = user;
                 next();
             }
         })
     }
     else{
+        res.locals.user = null;
         res.redirect('/');
     }
 }
