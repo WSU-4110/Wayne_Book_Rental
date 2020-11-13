@@ -10,5 +10,6 @@ router.get('/signup', function(req, res, next){
 
 router.post('/signup', AuthController.register)
 router.post('/', AuthController.login)
+router.get('/logout', AuthController.logout);
 
 module.exports = router
