@@ -65,14 +65,18 @@
                     <img class='img-circle profile-img' height=110 width=120 src='Images/default.png'></div>
                 <!-- <div class="head" style="text-align: center;"><b>Welcome <%= user.fname %> <%= user.lname %></b></div> -->
                 <br>
-                <div class="stars" data-rating = "0" style="text-align: center;">
+                <!-- <div class="stars" data-rating = "0" style="text-align: center;">
                     <span class="star">&nbsp;</span>
                     <span class="star">&nbsp;</span>
                     <span class="star">&nbsp;</span>
                     <span class="star">&nbsp;</span>
                     <span class="star">&nbsp;</span>
                     
-                </div>  
+                </div>   -->
+
+                <h3 style="text-align: center; color: black;"class="rate">Current rating: <%= user.rating %>/5</h3>
+                <h3 style="text-align: center; color: black;"class="rate">Rated by: <%= user.numRated %> users</h3>
+
                 <form>
                     <div class="row" >
                          <div class="profile-user-info" >

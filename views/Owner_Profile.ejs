@@ -4,18 +4,31 @@
         <title> Wayne Book-Rental</title>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <link href="../Profile.css" rel="stylesheet">
         <script>
-            document.addEventListener('DOMContentLoaded' ,function(){
-                let stars =document.querySelectorAll('.star');
-                stars.forEach(function(star){
-                    star.addEventListener('click', setRating);
-                });
+
+            // document.addEventListener('DOMContentLoaded' ,function(){
+            //     let stars =document.querySelectorAll('.star');
+            //     stars.forEach(function(star){
+            //         star.addEventListener('click', setRating);
+            //     });
                 
-                let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
-                let target = stars[rating-1];
-                target.dispatchEvent(new MouseEvent('click'));
-            });
+            //     let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+            //     let target = stars[rating-1];
+            //     target.dispatchEvent(new MouseEvent('click'));
+            // });
+
+            function showratingalert(){
+                var userid = document.getElementById("userid").value;
+    
+                var userExits = '<%= Owner.ratedby %>'.includes(userid);
+                
+                if(userExits){
+                    document.getElementById("userAlreadyRated").style.display = "block";
+                    window.location("#");
+                }
+            }
             
             function setRating(ev){
                 let span = ev.currentTarget;
@@ -53,6 +66,8 @@
             </div>
         </div>
 
+        <input type="hidden" id="userid" value="<%= user._id %>">
+
 
         <div class = "container">
 
@@ -61,17 +76,39 @@
                 <div style="text-align: center;">
                     <img class='img-circle profile-img' height=110 width=120 src='../Images/default.png'></div>
                 <br>
-                <div class="stars" data-rating = "0" style="text-align: center;">
-                    <span class="star">&nbsp;</span>
-                    <span class="star">&nbsp;</span>
-                    <span class="star">&nbsp;</span>
-                    <span class="star">&nbsp;</span>
-                    <span class="star">&nbsp;</span>
+                
+                <!-- <div class="stars"> -->
+                <form action="/rate" method="POST" id="rateForm">  
                     
-                  </div>  
+                    <div class="stars">
+                      <input class="star star-5" id="star-5" type="radio" name="star" value="5"/>
+                      <label class="star star-5" for="star-5"></label>
+                      <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+                      <label class="star star-4" for="star-4"></label>
+                      <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+                      <label class="star star-3" for="star-3"></label>
+                      <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+                      <label class="star star-2" for="star-2"></label>
+                      <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+                      <label class="star star-1" for="star-1"></label>
+                    </div>  
+                    <div class="form-row text-center">
+                        <button type="submit" class="btn btn-warning btn-sm" onclick="showratingalert();">Rate</button>
+                    </div>
+                    <input type="hidden" name="userrating" value="<%= Owner.rating %>">
+                    <input type="hidden" name="numrated" value="<%= Owner.numRated %>">
+                    <input type="hidden" name="_id" value="<%= Owner._id %>">
+                </form>
 
-                  <div class="report" style="text-align: center;">
-                    <a class="btn btn-danger btn-sm" href="/reportprofile/<%= Owner._id %>"><i class="fa fa-flag"></i> Report</a>
+                <div class="alert alert-danger" role="alert" id="userAlreadyRated">
+                    You gotta chill bro, you have already rated this user!!
+                </div>
+                
+                <h3 style="text-align: center; color: black;"class="rate">Current rating: <%= Owner.rating %>/5</h3>
+                <h3 style="text-align: center; color: black;"class="rate">Rated by: <%= Owner.numRated %> users</h3>
+            
+                <div class="report" style="text-align: center;">
+                    <a class="btn btn-danger btn-sm" href="/reportprofile/<%= Owner._id %>"><i class="fa fa-flag"></i> Report User</a>
                     <!-- <a class="btn btn-danger btn-sm" href="../report.html"><i class="fa fa-flag"></i> Report</a> -->
                     
                 </div>
