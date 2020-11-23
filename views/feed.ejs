@@ -30,6 +30,14 @@
            <a class="btn btn-success btn-s" href="#" onclick="document.getElementById('search').submit()"><i class="fa fa-search"></i></a>
     </form>
 
+    <form action="/searchSubject" id="searchSubject" class="searchSubject" method="post"  role="form">
+
+        <label for="subject" placeholder="Search By Subject"></label>
+           <input type="text" id="subject" placeholder="Search By Subject" name="subject">
+        
+           <a class="btn btn-success btn-s" href="#" onclick="document.getElementById('searchSubject').submit()"><i class="fa fa-search"></i></a>
+    </form>
+
     <form action="/filter" id="filter" class="form-inline" method="post"  role="form">
 
         <label for="subject">Filter By Subject:</label>
