@@ -2,9 +2,11 @@
 <html>
     <head>
         <title> Wayne Book-Rental</title>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="../Profile.css" rel="stylesheet">
         <script>
 
@@ -18,7 +20,15 @@
             //     let target = stars[rating-1];
             //     target.dispatchEvent(new MouseEvent('click'));
             // });
-
+            function showPhone(){
+                var phone = '<%= Owner.phone %>';
+                if(phone === ''){
+                    alert("No Phone number added for this user.");
+                    window.location("#");
+                    return true;
+                    
+                }
+            }
             function showratingalert(){
                 var userid = document.getElementById("userid").value;
     
@@ -158,14 +168,17 @@
                                     <span>10/29/2020</span>
                                 </div>
                             </div>
+                            
                         </div>
-
+                        <p><a href='mailto:<%=Owner.email%>?&Subject=Book Inquiry&body=Hi! I am intreseted in rent your book. is it still available?'><i class="fa fa-envelope-o" style="font-size:36px; margin-left: 180px; color:black"></i></a>
+                        ,<a href='tel:<%=Owner.phone%>' onclick="showPhone();"><i class='fas fa-phone' style='font-size:30px; margin-left: 50;color: black;'></i></a></p>
+                        <i class="material-icons" style="font-size:36px; color: red;"></i>
                         <div class="hr hr-8 dotted"></div>
 
                                 <div class="profile-info-value">
                                     <a href="#" target="_blank"></a>
-                                </div>
-                            </div>
+                                </div> 
+                            </div>book-feed
                         </div>
                     </div>         
                 </form>
