@@ -25,7 +25,11 @@ const userSchema = new Schema({
         type: Number,
         default: 0
    },
-   ratedby: [{type:String, ref:"userSchema"}]
+   ratedby: [{type:String, ref:"userSchema"}],
+   Wallet:{
+       type: Number,
+       default: 0.00
+   }
    
 
 }, {timestamps: true});

@@ -29,6 +29,19 @@
                     window.location("#");
                 }
             }
+
+            function checkBalance(price){
+        
+                if (Number("<%= user.Wallet %>") < price){
+                
+                    alert("You dont have enough balance to rent this book, please use Paypal instead!");
+                    window.location("#");
+                }
+                else{
+                    document.getElementById("Walletform").submit();
+                }
+                
+            }
             
             function setRating(ev){
                 let span = ev.currentTarget;
@@ -159,11 +172,14 @@
                 
                 <div type='container'>
                     <h2><%= Owner.fname %>'s listing</h2>
+
                     <section id="main-content">
                         <div id="book-feed" role="feed"></div>
                     </section>
                     <%if (books.length > 0){ %>
-                    <% books.forEach(function (PostBook) { %>
+                    <% books.forEach(function (PostBook) {
+                        if (PostBook.Rented == false) {%>
+                    <form action="/pay/<%= PostBook._id %>" method = "POST">
                     <div class ="post-bar">
                         <div class="row">
                             <div class="column">
@@ -185,13 +201,18 @@
                             </div>
                             </div>
                             
-                            <div class ="edit_column"> 
-                                <div class="btn-edit">
-                                    <a class="btn btn-success btn-s" href="#">Rent Book</i></a>
+                            <div class ="column">
+                                <div class="btn-buy-details">
+                                    <button id ="btnBook" class="btn book" style="background-color: white;"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button>
+                                    <form action="/WBRWallet/<%= PostBook._id %>" id="Walletform" method="POST" role="form">
+                                        <button type="button" class="btn btn-success btn-lg" onclick="checkBalance('<%= PostBook.Price %>');">Use WBR Balance</button>
+                                    </form>
                                 </div>
-                            </div>  
+                            </div>
+
                     </div>
-                    <% })}else{ %>
+                    </form>
+                    <% }})}else{ %>
                         <h3 style="text-align: center;">No Record Found</h3>
                         <% } %>
 

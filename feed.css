@@ -70,6 +70,8 @@ h2{
   background-color: rgb(112, 201, 71);
 }
 
+
+
 /* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
 @media (max-width: 800px) {
   .form-inline input {
@@ -143,6 +145,8 @@ h2{
     text-align: right; 
     margin-left: 137%;
 }
+
+
 .btn-edit{
   text-align: right; 
   margin-left: 0%;
@@ -199,5 +203,4 @@ Footer{
  margin:  0;
 
 }
-
 

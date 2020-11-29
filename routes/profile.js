@@ -3,7 +3,12 @@ var multer = require("multer");
 const router = express.Router();
 const path = require("path");
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
+
+const SendgridApi = process.env.Sendgrid_Api;
+sgMail.setApiKey(SendgridApi);
 
 const PostBook = require("../models/post.model");
 const UserModel = require("../models/User");
@@ -119,7 +124,9 @@ router.post("/report", authenticate, checkUser, function (req, res, next) {
         text: req.body.username + ' has reported the user ' + req.body.name + " with user unique id " + req.body.ID + 
                 " for: " + req.body.msg + ". Please review the issue and take steps and reach out to them at " + req.body.senderemail
     }, function(err, json){
-        if(err){return res.send(err);}
+        if(err){
+            console.log(err);
+            return res.send(err);}
         res.redirect('feed');
     })
 

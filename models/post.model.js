@@ -43,6 +43,10 @@ let PostBook = new Schema({
     },
     OwnerID:{
         type: String
+    },
+    Rented:{
+        type: Boolean,
+        default: false
     }
 
 }, {timestamps: true});

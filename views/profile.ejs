@@ -16,6 +16,17 @@
                 let target = stars[rating-1];
                 target.dispatchEvent(new MouseEvent('click'));
             });
+
+            function payoutconfirmation(balance){
+                if(balance == Number(0)){
+                    alert("Your WBR Blance is 0!");
+                }
+                else{
+                    document.getElementById("paypal").submit();
+                    alert("Your WBR Balance have been moved to your PayPal account successfully!");
+                }
+                
+            }
             
             function setRating(ev){
                 let span = ev.currentTarget;
@@ -109,8 +120,18 @@
                                     <span>10/29/2020</span>
                                 </div>
                             </div>
-                        </div>
 
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> WBR Balance: </div>
+
+                                <div class="profile-info-value">
+                                    <span>$<%= user.Wallet %></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        
                         <div class="hr hr-8 dotted"></div>
 
                                 <div class="profile-info-value">
@@ -119,6 +140,12 @@
                             </div>
                         </div>
                     </div>         
+                </form>
+
+                <form action="/payout/<%= user._id %>" id="paypal" method="post"  role="form">
+                    <div class="form-row text-center">
+                        <button type="button" class="btn btn-info btn-sm" onclick="payoutconfirmation('<%= user.Wallet %>');">Move Balance to PayPal</button>
+                    </div>
                 </form>
                 
                 <div type='container'>
