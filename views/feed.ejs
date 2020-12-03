@@ -7,16 +7,41 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script>
-    function checkBalance(price){
-        
-        if (Number("<%= user.Wallet %>") < price){
-        
-            alert("You dont have enough balance to rent this book, please use Paypal instead!");
-            window.location("#");
+    function alertpaypal(){
+        var con = confirm("You are about to be redirected to the PayPal checkout page!");
+        if(con){
+            document.getElementById("paypalform").submit();
         }
         else{
-            document.getElementById("Walletform").submit();
+
         }
+    }
+    function checkBalance(price){
+
+        var con = confirm("You are about to rent this book, are you sure you want to coninue?");
+        if(con){
+            console.log(price);
+            if (Number("<%= user.Wallet %>") < price){
+                
+                alert("You dont have enough balance to rent this book, please use Paypal instead!");
+                window.location("#");
+            }
+            else{
+                document.getElementById('Wallet').submit();
+                alert("Payment processed successfully!");
+                
+            }
+            //document.getElementById('Wallet').submit();
+        }
+        //document.getElementById('Wallet').submit();
+        // if (Number("<%= user.Wallet %>") < price){
+        
+        //     alert("You dont have enough balance to rent this book, please use Paypal instead!");
+        //     window.location("#");
+        // }
+        // else{
+        //     document.getElementById("Walletform").submit();
+        // }
         
     }
 
@@ -43,6 +68,14 @@
            <input type="text" id="title" placeholder="Search By Title" name="title">
         
            <a class="btn btn-success btn-s" href="#" onclick="document.getElementById('search').submit()"><i class="fa fa-search"></i></a>
+    </form>
+
+    <form action="/searchSubject" id="searchSubject" class="searchSubject" method="post"  role="form">
+
+        <label for="subject" placeholder="Search By Subject"></label>
+           <input type="text" id="subject" placeholder="Search By Subject" name="subject">
+
+           <a class="btn btn-success btn-s" href="#" onclick="document.getElementById('searchSubject').submit()"><i class="fa fa-search"></i></a>
     </form>
 
     <form action="/filter" id="filter" class="form-inline" method="post"  role="form">
@@ -79,7 +112,7 @@
         <%if (books.length > 0){ %>
         <% books.forEach(function (PostBook) { 
             if (PostBook.Rented == false) {%>
-        <form action="/pay/<%= PostBook._id %>" method = "POST">
+        <!-- <form action="/pay/<%= PostBook._id %>" method = "POST"> -->
         <div class ="post-bar">
             <div class="row">
                 <div class="column">
@@ -101,22 +134,30 @@
                 </div>
                 </div>
 
-                <form action="/pay" id="paypal" method="post"  role="form">
+                <!-- <form action="/pay" id="paypal" method="post"  role="form">
                     <button type="submit" class="btn btn-primary btn-sm">Paypal</button>
                 </form>
 
                 <form action="/payout/<%= user._id %>" id="paypal" method="post"  role="form">
                     <button type="submit" class="btn btn-primary btn-sm">Pay User</button>
-                </form>
+                </form> -->
                 
                 <div class ="column">
                     <% if (PostBook.OwnerID != user._id) {%>
                     <div class="btn-buy-details"  style="text-align: center; width: 100%; margin-left: 110%;" >
-                        <button id ="btnBook" class="btn book" style="background-color: white;"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button>
-                        <form action="/WBRWallet/<%= PostBook._id %>" id="Walletform" method="POST" role="form">
-                            <button type="button" class="btn btn-success btn-lg" onclick="checkBalance('<%= PostBook.Price %>');">Use WBR Balance</button>
+                        <form action="/pay/<%= PostBook._id %>" id="paypalform" method = "POST">
+                            <button type="button"   id ="btnBook" class="btn book" style="background-color: white;" onclick="alertpaypal();"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button>
+                        </form>
+                        <!-- <button id ="btnBook" class="btn book" style="background-color: white;"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button> -->
+                        <form action="/WBRWallet/<%= PostBook._id %>" id="Wallet" method="post"  role="form">
+                            <input type="hidden" > 
+                            <button type="button" name="walletbutton" class="btn btn-success btn-lg" onclick="checkBalance('<%= PostBook.Price %>')">Use WBR Balance</button>
                         </form>
                     </div>
+                    <!-- <form action="/WBRWallet/<%= PostBook._id %>" id="Wallet" method="post"  role="form">
+                        <input type="hidden" > 
+                        <button type="button" name="walletbutton" class="btn btn-success btn-lg" >Use WBR Balance</button>
+                    </form> -->
                     <% }else{%>
                         <div class="btn-edit" style = "text-align: center; width: 100%; margin-left: 110%;">
                             <a class="btn btn-primary btn-lg" href="/edit/<%= PostBook._id %>"><i class="fa fa-edit"></i></a>
