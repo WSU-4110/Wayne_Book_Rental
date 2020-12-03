@@ -29,7 +29,8 @@ const userSchema = new Schema({
    Wallet:{
        type: Number,
        default: 0.00
-   }
+   },
+   wishlist: [{type:String, ref:"PostBook"}]
    
 
 }, {timestamps: true});

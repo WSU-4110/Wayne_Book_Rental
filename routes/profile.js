@@ -165,5 +165,42 @@ router.post("/rate", authenticate, checkUser, (req, res, next)=>{
     })
 })
 
+router.get("/wishlist", authenticate, checkUser, function (req, res, next) {
+
+    //res.render('profile');
+
+    var fltrprofile = res.locals.user._id;
+
+    UserModel.findById(fltrprofile, function(err, data){
+        if(err)console.log(err);
+        PostBook.find({}, function (err, response){
+            var contains = [];
+        
+            for(let i=0; i<response.length; i++){
+                if (data.wishlist.includes(response[i]._id)){
+                    contains.push(response[i]);
+                }
+            }
+            res.render('Wishlist',{
+                books: contains
+            })
+        }).sort({"id":-1})
+    })
+
+  
+
+});
+
+router.post("/wishlist/:id", authenticate, checkUser, function(req, res, next){
+    var bookid = req.params.id;
+    var userid = res.locals.user._id;
+    console.log(userid);
+    console.log(bookid);
+    UserModel.findByIdAndUpdate(userid,{
+        $push:{wishlist: bookid}
+    },{new: true, useFindAndModify: false}) 
+    res.redirect("/feed");
+})
+
 
 module.exports = router;

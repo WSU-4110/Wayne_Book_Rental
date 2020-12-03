@@ -17,7 +17,12 @@
         else{
             document.getElementById("Walletform").submit();
         }
-        
+    }
+
+
+    function submitwishlist(){
+        alert("The book has been added to your wishlist!");
+        documen.getElementById("wishlist").submit();
     }
 
     
@@ -30,6 +35,7 @@
             <a href="/post">Rental Form</a>
             <!-- <a  href="Profile.html">Profile</a> -->
             <a  href="/profile">Profile</a>
+            <a href="/wishlist">Wishlist</a>
             <div class="topnav-right">
                 <a href="/profile">Welcome <%= user.fname %> <%= user.lname %></a>
                 <a href="/logout">Logout</a>
@@ -106,15 +112,18 @@
                 </form>
 
                 <form action="/payout/<%= user._id %>" id="paypal" method="post"  role="form">
-                    <button type="submit" class="btn btn-primary btn-sm">Pay User</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Pay User</button> 
                 </form>
                 
                 <div class ="column">
                     <% if (PostBook.OwnerID != user._id) {%>
                     <div class="btn-buy-details"  style="text-align: center; width: 100%; margin-left: 110%;" >
-                        <button id ="btnBook" class="btn book" style="background-color: white;"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button>
+                        <button id ="btnBook" class="btn book" style="background-color: white;"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button> 
                         <form action="/WBRWallet/<%= PostBook._id %>" id="Walletform" method="POST" role="form">
-                            <button type="button" class="btn btn-success btn-lg" onclick="checkBalance('<%= PostBook.Price %>');">Use WBR Balance</button>
+                            <button type="button" class="btn btn-success btn-lg" onclick="checkBalance('<%= PostBook.Price %>');">Use WBR Balance</button> 
+                        </form>
+                        <form action="/wishlist/<%= PostBook._id %>" id="wishlist" method="POST" role="form">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="submitwishlist();">Add book to wishlist</button>
                         </form>
                     </div>
                     <% }else{%>
@@ -184,7 +193,7 @@
         </div>
     </div> -->
     <footer class ="PostFooter">
-        <p><small>Proudly Build in Detroit  © 2020 Team BookKeepers. All Rights Reserved. </small></p>
+        <p><small>Proudly Build in Detroit <br> © 2020 Team BookKeepers. All Rights Reserved. </small></p>
     </footer>
 </body>
 </html>
