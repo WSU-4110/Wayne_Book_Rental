@@ -1,0 +1,210 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title> Wayne Book-Rental</title>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link href="Profile.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            document.addEventListener('DOMContentLoaded' ,function(){
+                let stars =document.querySelectorAll('.star');
+                stars.forEach(function(star){
+                    star.addEventListener('click', setRating);
+                });
+                
+                let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+                let target = stars[rating-1];
+                target.dispatchEvent(new MouseEvent('click'));
+            });
+
+            function payoutconfirmation(balance){
+                if(balance == Number(0)){
+                    alert("Your WBR Blance is 0!");
+                }
+                else{
+                    document.getElementById("paypal").submit();
+                    alert("Your WBR Balance have been moved to your PayPal account successfully!");
+                }
+                
+            }
+            
+            function setRating(ev){
+                let span = ev.currentTarget;
+                let stars = document.querySelectorAll('.star');
+                let match = false;
+                let num =0;
+                stars.forEach(function(star, index){
+                    if(match){
+                        star.classList.remove('rated');
+                    }
+                    else{
+                        star.classList.add('rated');
+                        
+                    }
+                    if(star === span){
+                        match = true;
+                        num = index +1;
+                    }
+                })
+                document.querySelector('.stars').setAttribute('data-rating', num);
+                
+                }
+        
+        
+        
+        </script>
+    </head>
+    <body style="background-image:url(Background.jpeg)">
+        <div class="topnav">
+            <a href="/feed">Home</a>
+            <a href="/post">Rental Form</a>
+            <a class="active" href="/profile">Profile</a>
+            <div class="topnav-right">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+
+        <div class = "container">
+
+            <form action = "" method = "post">
+                <button class ="btn btn-default" style="float:right; width:70px;" name="submit1">EDIT</button>
+            </form>
+            <div class = "wrapper">
+                <h1 class="head" style="text-align: center;"> <%= user.fname %> <%= user.lname %></h1>
+                <div style="text-align: center;">
+                    <img class='img-circle profile-img' height=110 width=120 src='Images/default.png'></div>
+                <!-- <div class="head" style="text-align: center;"><b>Welcome <%= user.fname %> <%= user.lname %></b></div> -->
+                <br>
+                <!-- <div class="stars" data-rating = "0" style="text-align: center;">
+                    <span class="star">&nbsp;</span>
+                    <span class="star">&nbsp;</span>
+                    <span class="star">&nbsp;</span>
+                    <span class="star">&nbsp;</span>
+                    <span class="star">&nbsp;</span>
+                    
+                </div>   -->
+
+                <h3 style="text-align: center; color: black;"class="rate">Current rating: <%= user.rating %>/5</h3>
+                <h3 style="text-align: center; color: black;"class="rate">Rated by: <%= user.numRated %> users</h3>
+
+                <form>
+                    <div class="row" >
+                         <div class="profile-user-info" >
+                            <div class="profile-info-row" >
+                                <div class="profile-info-name" > Firstname </div>
+
+                                <div class="profile-info-value">
+                                    <span><%= user.fname %></span>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Lastname </div>
+
+                                <div class="profile-info-value">
+                                    <span><%= user.lname %></span>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Email </div>
+
+                                <div class="profile-info-value">
+                                    <span><%= user.email %></span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Joined </div>
+
+                                <div class="profile-info-value">
+                                    <span>10/29/2020</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> WBR Balance: </div>
+
+                                <div class="profile-info-value">
+                                    <span>$<%= user.Wallet %></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        <div class="hr hr-8 dotted"></div>
+
+                                <div class="profile-info-value">
+                                    <a href="#" target="_blank"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>         
+                </form>
+
+                <form action="/payout/<%= user._id %>" id="paypal" method="post"  role="form">
+                    <div class="form-row text-center">
+                        <button type="button" class="btn btn-info btn-sm" onclick="payoutconfirmation('<%= user.Wallet %>');">Move Balance to PayPal</button>
+                    </div>
+                </form>
+                
+                <div type='container'>
+                    <h2>Your listing</h2>
+                    <section id="main-content">
+                        <div id="book-feed" role="feed"></div>
+                    </section>
+                    <%if (books.length > 0){ %>
+                    <% books.forEach(function (PostBook) { %>
+                    <div class ="post-bar">
+                        <div class="row">
+                            <div class="column">
+                                <a target="_blank" href="">
+                                    <img src="../uploads/<%=PostBook.Image %>"" alt="book" style="width:260px; height: 290px;">
+                                </a>
+                            </div>
+                            <div class="column" style="margin-left:5%;">
+                                <h3 class="post-details"><%= PostBook.Title %></h3>
+                                <p class="post-details">Author: <%= PostBook.FName %> <%= PostBook.LName %></p>
+                                <p class="post-details">Publisher: <%= PostBook.Publisher %></p>
+                                <p class="post-details">Edition: <%= PostBook.Edition %></p>
+                                <p class="post-details">Subject: <%= PostBook.Subject %></p>
+                                <p class="post-details">ISBN: <%= PostBook.Isbn %></p>
+                                <p class="post-details">Condition: <%= PostBook.Condition %> </p>
+                                <p class="post-details">Description: <%= PostBook.Description %> </p>
+                                <p class="post-details">Book Owner: <%= PostBook.OwnerFname %> <%= PostBook.OwnerLname %></p>
+                                <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
+                            </div>
+                            </div>
+                            
+                            <div class ="edit_column"> 
+                                <div class="btn-edit">
+                                    <!-- <a class="btn book" href="/edit/<%= PostBook._id %>">Edit</a>  -->
+                                    <!-- <a class="btn book" href="/delete/<%= PostBook._id %>" > Delete</a> -->
+                                    <a class="btn btn-primary btn-lg" href="/edit/<%= PostBook._id %>"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-danger btn-lg" href="/delete/<%= PostBook._id %>"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </div>  
+                            
+                            <!-- Profile page needs to be active so we can put edit button on user's posts from profile page as well, 
+                                and only the poster can edit the post-->
+                                <!--<div class ="edit_column"> 
+                                    <div class="btn-edit">
+                                        <a href="views/Post-BookV2.ejs">
+                                            <button class="btn book" > Edit</button>
+                                        </a>
+                                    </div>
+                                </div>-->
+            
+                    </div>
+                    <% })}else{ %>
+                        <h3 style="text-align: center;">No Record Found</h3>
+                        <% } %>
+
+            </div>
+        </div>
+        <footer class ="PostFooter">
+            <p><small>Proudly Build in Detroit  © 2020 Team BookKeepers. All Rights Reserved. </small></p>
+        </footer>
+    </body>  
+</html>

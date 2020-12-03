@@ -34,6 +34,19 @@ let PostBook = new Schema({
     },
     Image: {
         type: String
+    },
+    OwnerFname: {
+        type: String
+    },
+    OwnerLname: {
+        type: String
+    },
+    OwnerID:{
+        type: String
+    },
+    Rented:{
+        type: Boolean,
+        default: false
     }
 
 }, {timestamps: true});

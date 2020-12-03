@@ -3,7 +3,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 
-const authenticate = require("../middleware/authenticate");
+const { authenticate, checkUser} = require("../middleware/authenticate");
+
+const createToken = (id) => {
+  return jwt.sign({ id }, "verySecretValue", {
+    expiresIn: "1h",
+  });
+};
 
 const register = (req, res, next) => {
   bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
@@ -47,16 +53,15 @@ const login = (req, res, next) => {
           });
         }
         if (result) {
-          let token = jwt.sign({ name: user.name }, "verySecretValue", {
+          /*let token = jwt.sign({ name: user.name }, "verySecretValue", {
             expiresIn: "1h",
-          });
-          //res.redirect('/home');
-          res.sendFile(path.join(__dirname, "../feed_2.0.html"));
+          });*/
+          const token = createToken(user._id);
+          res.cookie("jwt", token, { httpOnly: true, maxAge: 1000 * 1000 });
+          res.redirect("/feed");
           console.log("Logged in successfully!");
           console.log(token);
         } else {
-          //res.redirect('/');
-          //console.log('Password did not match');
           res.json({
             message: "Password did not match!",
           });
@@ -70,7 +75,13 @@ const login = (req, res, next) => {
   });
 };
 
+const logout = (req, res, next) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
+};
+
 module.exports = {
   register,
   login,
+  logout,
 };

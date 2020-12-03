@@ -1,18 +1,26 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
+
+///////Checking for the token if it exits and checks the vality////////////////
 const authenticate = (req, res, next) => {
-    try{
-        const token = req.headers.authorization.split('')[1]
-        const decode = jwt.verify(token, 'verySecretValue')
-        
-        req.user = decode
-        next()
-    }
-    catch(error){
-        res.json({
-            message: 'Authentication Failed!'
+    const token = req.cookies.jwt;
+
+    if(token){
+        jwt.verify(token, 'verySecretValue', (err, decodedToken) =>{
+            if(err){
+                console.log(err.message);
+                res.redirect('/');
+            }
+            else{
+                //console.log(decodedToken);
+                next();
+            }
         })
+    }
+    else{
+        res.redirect('/');
     }
 }
 
-module.exports = authenticate
+module.exports = authenticate;

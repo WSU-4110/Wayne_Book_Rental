@@ -16,7 +16,22 @@ const userSchema = new Schema({
    },
    phone: {
        type: String
-   }
+   },
+   rating: {
+       type: Number,
+       default: 0
+   },
+   numRated:{
+        type: Number,
+        default: 0
+   },
+   ratedby: [{type:String, ref:"userSchema"}],
+   Wallet:{
+       type: Number,
+       default: 0.00
+   },
+   wishlist: [{type:String, ref:"PostBook"}]
+   
 
 }, {timestamps: true});
 

@@ -5,6 +5,8 @@ const path = require("path");
 
 const PostBook = require("../models/post.model");
 const authenticate = require("../middleware/authenticate");
+const checkUser = require("../middleware/checkUser");
+const { userInfo } = require("os");
 
 router.use(express.static(__dirname + "/"));
 
@@ -29,12 +31,13 @@ var upload = multer({
 }).single("img");
 //////////////////////////////////////////////////////////////////
 
-router.get("/post", authenticate, function (req, res, next) {
+router.get("/post", authenticate, checkUser, function (req, res, next) {
   //res.redirect('/post');
-  res.sendFile(path.join(__dirname, "../Post-Book.html"));
+  //res.sendFile(path.join(__dirname, "../Post-Book.html"));
+  res.render('Post-Book');
 });
 
-router.post("/post", upload, function (req, res, next) {
+router.post("/post", upload, checkUser, function (req, res, next) {
   var bookDetails = new PostBook({
     Title: req.body.title,
     FName: req.body.fname,
@@ -47,6 +50,9 @@ router.post("/post", upload, function (req, res, next) {
     Description: req.body.message,
     Price: req.body.Price,
     Image: req.file.filename,
+    OwnerFname: res.locals.user.fname,
+    OwnerLname: res.locals.user.lname,
+    OwnerID: res.locals.user._id
   });
   console.log(bookDetails);
   bookDetails.save(function (err, req1) {
@@ -54,5 +60,8 @@ router.post("/post", upload, function (req, res, next) {
     else res.sendFile(path.join(__dirname, "../Thank-You.html"));
   });
 });
+
+
+
 
 module.exports = router;
