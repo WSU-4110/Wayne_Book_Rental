@@ -1,0 +1,238 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title> Wayne Book-Rental</title>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="../Profile.css" rel="stylesheet">
+        <script>
+
+            // document.addEventListener('DOMContentLoaded' ,function(){
+            //     let stars =document.querySelectorAll('.star');
+            //     stars.forEach(function(star){
+            //         star.addEventListener('click', setRating);
+            //     });
+                
+            //     let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+            //     let target = stars[rating-1];
+            //     target.dispatchEvent(new MouseEvent('click'));
+            // });
+            function showPhone(){
+                var phone = '<%= Owner.phone %>';
+                if(phone === ''){
+                    alert("No Phone number added for this user.");
+                    window.location("#");
+                    return true;
+                    
+                }
+            }
+            function showratingalert(){
+                var userid = document.getElementById("userid").value;
+    
+                var userExits = '<%= Owner.ratedby %>'.includes(userid);
+                
+                if(userExits){
+                    document.getElementById("userAlreadyRated").style.display = "block";
+                    window.location("#");
+                }
+            }
+
+            function checkBalance(price){
+        
+                if (Number("<%= user.Wallet %>") < price){
+                
+                    alert("You dont have enough balance to rent this book, please use Paypal instead!");
+                    window.location("#");
+                }
+                else{
+                    document.getElementById("Walletform").submit();
+                }
+                
+            }
+            
+            function setRating(ev){
+                let span = ev.currentTarget;
+                let stars = document.querySelectorAll('.star');
+                let match = false;
+                let num =0;
+                stars.forEach(function(star, index){
+                    if(match){
+                        star.classList.remove('rated');
+                    }
+                    else{
+                        star.classList.add('rated');
+                        
+                    }
+                    if(star === span){
+                        match = true;
+                        num = index +1;
+                    }
+                })
+                document.querySelector('.stars').setAttribute('data-rating', num);
+                
+                }
+        
+        
+        
+        </script>
+    </head>
+    <body style="background-image:url(../Background.jpeg)">
+        <div class="topnav">
+            <a href="/feed">Home</a>
+            <a href="/post">Rental Form</a>
+            <a class="active" href="/profile">Profile</a>
+            <div class="topnav-right">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+        <input type="hidden" id="userid" value="<%= user._id %>">
+
+
+        <div class = "container">
+
+            <div class = "wrapper">
+                <h1 class="head" style="text-align: center;"> <%= Owner.fname %> <%= Owner.lname %></h1>
+                <div style="text-align: center;">
+                    <img class='img-circle profile-img' height=110 width=120 src='../Images/default.png'></div>
+                <br>
+                
+                <!-- <div class="stars"> -->
+                <form action="/rate" method="POST" id="rateForm">  
+                    
+                    <div class="stars">
+                      <input class="star star-5" id="star-5" type="radio" name="star" value="5"/>
+                      <label class="star star-5" for="star-5"></label>
+                      <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+                      <label class="star star-4" for="star-4"></label>
+                      <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+                      <label class="star star-3" for="star-3"></label>
+                      <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+                      <label class="star star-2" for="star-2"></label>
+                      <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+                      <label class="star star-1" for="star-1"></label>
+                    </div>  
+                    <div class="form-row text-center">
+                        <button type="submit" class="btn btn-warning btn-sm" onclick="showratingalert();">Rate</button>
+                    </div>
+                    <input type="hidden" name="userrating" value="<%= Owner.rating %>">
+                    <input type="hidden" name="numrated" value="<%= Owner.numRated %>">
+                    <input type="hidden" name="_id" value="<%= Owner._id %>">
+                </form>
+
+                <div class="alert alert-danger" role="alert" id="userAlreadyRated">
+                    You gotta chill bro, you have already rated this user!!
+                </div>
+                
+                <h3 style="text-align: center; color: black;"class="rate">Current rating: <%= Owner.rating %>/5</h3>
+                <h3 style="text-align: center; color: black;"class="rate">Rated by: <%= Owner.numRated %> users</h3>
+            
+                <div class="report" style="text-align: center;">
+                    <a class="btn btn-danger btn-sm" href="/reportprofile/<%= Owner._id %>"><i class="fa fa-flag"></i> Report User</a>
+                    <!-- <a class="btn btn-danger btn-sm" href="../report.html"><i class="fa fa-flag"></i> Report</a> -->
+                    
+                </div>
+
+                <form>
+                    <div class="row" >
+                         <div class="profile-user-info" >
+                            <div class="profile-info-row" >
+                                <div class="profile-info-name" > Firstname </div>
+
+                                <div class="profile-info-value">
+                                    <span><%= Owner.fname %></span>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Lastname </div>
+
+                                <div class="profile-info-value">
+                                    <span><%= Owner.lname %></span>
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Email </div>
+
+                                <div class="profile-info-value">
+                                    <span><%= Owner.email %></span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Joined </div>
+
+                                <div class="profile-info-value">
+                                    <span>10/29/2020</span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <p><a href='mailto:<%=Owner.email%>?&Subject=Book Inquiry&body=Hi! I am intreseted in rent your book. is it still available?'><i class="fa fa-envelope-o" style="font-size:36px; margin-left: 180px; color:black"></i></a>
+                        ,<a href='tel:<%=Owner.phone%>' onclick="showPhone();"><i class='fas fa-phone' style='font-size:30px; margin-left: 50;color: black;'></i></a></p>
+                        <i class="material-icons" style="font-size:36px; color: red;"></i>
+                        <div class="hr hr-8 dotted"></div>
+
+                                <div class="profile-info-value">
+                                    <a href="#" target="_blank"></a>
+                                </div> 
+                            </div>book-feed
+                        </div>
+                    </div>         
+                </form>
+                
+                <div type='container'>
+                    <h2><%= Owner.fname %>'s listing</h2>
+
+                    <section id="main-content">
+                        <div id="book-feed" role="feed"></div>
+                    </section>
+                    <%if (books.length > 0){ %>
+                    <% books.forEach(function (PostBook) {
+                        if (PostBook.Rented == false) {%>
+                    <form action="/pay/<%= PostBook._id %>" method = "POST">
+                    <div class ="post-bar">
+                        <div class="row">
+                            <div class="column">
+                                <a target="_blank" href="">
+                                    <img src="../uploads/<%=PostBook.Image %>"" alt="book" style="width:260px; height: 290px;">
+                                </a>
+                            </div>
+                            <div class="column" style="margin-left:5%;">
+                                <h3 class="post-details"><%= PostBook.Title %></h3>
+                                <p class="post-details">Author: <%= PostBook.FName %> <%= PostBook.LName %></p>
+                                <p class="post-details">Publisher: <%= PostBook.Publisher %></p>
+                                <p class="post-details">Edition: <%= PostBook.Edition %></p>
+                                <p class="post-details">Subject: <%= PostBook.Subject %></p>
+                                <p class="post-details">ISBN: <%= PostBook.Isbn %></p>
+                                <p class="post-details">Condition: <%= PostBook.Condition %> </p>
+                                <p class="post-details">Description: <%= PostBook.Description %> </p>
+                                <p class="post-details">Book Owner: <%= PostBook.OwnerFname %> <%= PostBook.OwnerLname %></p>
+                                <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
+                            </div>
+                            </div>
+                            
+                            <div class ="column">
+                                <div class="btn-buy-details">
+                                    <button id ="btnBook" class="btn book" style="background-color: white;"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button>
+                                    <form action="/WBRWallet/<%= PostBook._id %>" id="Walletform" method="POST" role="form">
+                                        <button type="button" class="btn btn-success btn-lg" onclick="checkBalance('<%= PostBook.Price %>');">Use WBR Balance</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                    </div>
+                    </form>
+                    <% }})}else{ %>
+                        <h3 style="text-align: center;">No Record Found</h3>
+                        <% } %>
+
+            </div>
+        </div>
+        <footer class ="PostFooter">
+            <p><small>Proudly Build in Detroit  © 2020 Team BookKeepers. All Rights Reserved. </small></p>
+        </footer>
+    </body>  
+</html>

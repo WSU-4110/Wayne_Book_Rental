@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Feedback Form</title>
+	<style type="text/css" media="screen">
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: helvetica;
+		}
+
+		body {
+			background-color: #ddd;	
+		}
+
+		.main {
+			width: 500px;
+			margin: 50px auto;
+			border-radius: 10px;
+			border: 5px solid #083014;
+			border-left: 40px solid #083014;
+			border-right: 40px solid #083014;
+			box-shadow: 1px 2px 10px #555;
+		}
+
+		.info {
+			width: 100%;
+			background-color: #083014;
+			padding: 7px;
+			text-shadow: 1px 1px 1px #222;
+			color: #fff;
+			font-size: 20px;
+		}
+
+		.form-box {
+			padding: 20px;
+			background-color: #eee;
+		}
+
+		label {
+			color: navy;
+			font-size: 18px;
+		}
+
+		.inp,
+		.msg-box {
+			width: 100%;
+			padding: 10px;
+			margin-top: 4px;
+			margin-bottom: 5px;
+			border-radius: 5px;
+			border: 2px solid #556e3c;
+			font-weight: bold;
+			color: #556e3c;
+			border-right: 5px solid #556e3c;
+			border-left: 5px solid #556e3c;
+			resize: none;
+		}
+
+		.msg-box {
+			height: 80px;
+		}
+
+		.inp:focus,
+		.msg-box:focus {
+			outline: none;
+			border: 2px solid black;
+			border-right: 15px solid black;
+			border-left: 15px solid black;
+		}
+
+		.sub-btn {
+			width: 100%;
+			padding: 10px;
+			border-radius: 5px;
+			margin-top: 5px;
+			border: none;
+			background: linear-gradient(#0d270f, #05270b);
+			cursor: pointer;
+			color: #fff;
+			font-size: 20px;
+			text-shadow: 1px 1px 1px #444;
+		}
+
+		.sub-btn:hover {
+			background: linear-gradient(#4fac33, #2b8a30);
+			opacity: 0.8;
+			transition: all ease-out 0.2s;
+		}
+
+		.sub-btn:focus {
+			outline: none;
+		}
+
+		Footer {
+			text-align: center;
+			margin: 80 0;
+		}
+
+		@media(max-width: 720px) {
+			.main {
+				width: 90%;
+			}
+		}
+	</style>
+	<script>
+		function alerttext(){
+			alert("Your message was sent to the authority. A member will investigate and reachout to you ASAP");
+		}
+	</script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="info">Report Users!</div>
+		<form action="/report" method="post" name="form" class="form-box">
+			<label for="name">Name of the user reporting</label><br>
+			<input type="text" name="name" class="inp" placeholder="Enter Your Name"
+				value="<%= Owner.fname %> <%= Owner.lname %>"><br>
+
+			<input type="hidden" name="ID" value="<%= Owner._id %>">
+			<input type="hidden" name="username" value="<%= user.fname %> <%= user.lname %>">
+			<input type="hidden" name="senderemail" value="<%= user.email %>">
+
+			<label for="message">Message</label><br>
+			<textarea name="msg" class="msg-box" placeholder="Enter Your Message Here..." required></textarea><br>
+			<input type="submit" name="submit" value="Send" class="sub-btn" onclick="alerttext()">
+		</form>
+	</div>
+	<footer class="PostFooter">
+		<p><small>Proudly Build in Detroit © 2020 Team BookKeepers. All Rights Reserved. </small></p>
+	</footer>
+</body>
+
+</html>
