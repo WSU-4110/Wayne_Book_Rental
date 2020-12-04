@@ -4,7 +4,7 @@
   "description": "1. MD Bakhtiar R Akhib\r  2. Jainil Patel\r  3. AK Patel\r  4. George Esho\r  5. Mohamad Jad Baltaji",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "nodemon ./index.js --exec"
   },
   "repository": {
@@ -21,6 +21,7 @@
     "@sendgrid/mail": "^7.3.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
@@ -28,6 +29,7 @@
     "express-mongoose": "^0.1.0",
     "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mocha": "^8.2.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.15",
     "multer": "^1.4.2",
