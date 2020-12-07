@@ -3,7 +3,12 @@ var multer = require("multer");
 const router = express.Router();
 const path = require("path");
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
+
+const SendgridApi = process.env.Sendgrid_Api;
+sgMail.setApiKey(SendgridApi);
 
 const PostBook = require("../models/post.model");
 const UserModel = require("../models/User");
@@ -68,8 +73,12 @@ router.post("/edit/", authenticate, checkUser, function(req, res, next){
     })
 })
 
-router.get('/ownerprofile/:id', function(req, res, next){
+router.get('/ownerprofile/:id', authenticate, checkUser, function(req, res, next){
     var id = req.params.id;
+
+    if(id == res.locals.user._id){
+        res.redirect('/profile');
+    }
 
     var Ownerdata = UserModel.findById(id);
     var Bookdata = PostBook.find({OwnerID: id});
@@ -115,10 +124,46 @@ router.post("/report", authenticate, checkUser, function (req, res, next) {
         text: req.body.username + ' has reported the user ' + req.body.name + " with user unique id " + req.body.ID + 
                 " for: " + req.body.msg + ". Please review the issue and take steps and reach out to them at " + req.body.senderemail
     }, function(err, json){
-        if(err){return res.send(err);}
+        if(err){
+            console.log(err);
+            return res.send(err);}
         res.redirect('feed');
     })
 
 });
+
+router.post("/rate", authenticate, checkUser, (req, res, next)=>{
+    var id = req.body._id;
+    var rate_prev = Number(req.body.userrating);
+    
+    var newRating = Number(req.body.star);
+    
+    var numRated = Number(req.body.numrated) + 1;
+
+    let rate  = (Number(rate_prev) + Number(newRating)) / Number(numRated);
+
+    var addrating = UserModel.findByIdAndUpdate(id,{
+        rating: rate,
+        numRated: numRated,
+        $push:{ratedby:res.locals.user._id}
+    }, {new: true, useFindAndModify: false})
+
+    UserModel.findById(id,function(err,data){
+        var ratedbyusers = data.ratedby;
+
+        var ratedbyexits = ratedbyusers.includes(res.locals.user._id);
+        console.log(ratedbyexits);
+        if(!ratedbyexits){
+            addrating.exec(function(err, data){
+                if(err) throw err;
+                res.redirect('back');
+            })
+        }else{
+            console.log("User already rated");
+            res.status(204).send();
+        }
+    })
+})
+
 
 module.exports = router;

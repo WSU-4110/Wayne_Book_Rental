@@ -6,7 +6,22 @@
 <link href="../feed.css" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script>
+    function checkBalance(price){
+        
+        if (Number("<%= user.Wallet %>") < price){
+        
+            alert("You dont have enough balance to rent this book, please use Paypal instead!");
+            window.location("#");
+        }
+        else{
+            document.getElementById("Walletform").submit();
+        }
+        
+    }
 
+    
+</script>
 </head>
 <body>
     <div class="topnav">
@@ -70,7 +85,9 @@
             <a href="/post"><button class="btn book" >Post Book</button></a>
         </div>
         <%if (books.length > 0){ %>
-        <% books.forEach(function (PostBook) { %>
+        <% books.forEach(function (PostBook) { 
+            if (PostBook.Rented == false) {%>
+        <form action="/pay/<%= PostBook._id %>" method = "POST">
         <div class ="post-bar">
             <div class="row">
                 <div class="column">
@@ -91,24 +108,34 @@
                     <p class="post-details">Renting Price: $<%= PostBook.Price %> </p>
                 </div>
                 </div>
+
+                <form action="/pay" id="paypal" method="post"  role="form">
+                    <button type="submit" class="btn btn-primary btn-sm">Paypal</button>
+                </form>
+
+                <form action="/payout/<%= user._id %>" id="paypal" method="post"  role="form">
+                    <button type="submit" class="btn btn-primary btn-sm">Pay User</button>
+                </form>
                 
                 <div class ="column">
-                    <div class="btn-buy-details">
-                        <button class="btn book" > Book Rent</button>
+                    <% if (PostBook.OwnerID != user._id) {%>
+                    <div class="btn-buy-details"  style="text-align: center; width: 100%; margin-left: 110%;" >
+                        <button id ="btnBook" class="btn book" style="background-color: white;"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"></button>
+                        <form action="/WBRWallet/<%= PostBook._id %>" id="Walletform" method="POST" role="form">
+                            <button type="button" class="btn btn-success btn-lg" onclick="checkBalance('<%= PostBook.Price %>');">Use WBR Balance</button>
+                        </form>
                     </div>
-                </div>   
-                <!-- Profile page needs to be active so we can put edit button on user's posts from profile page as well, 
-                    and only the poster can edit the post-->
-                    <!-- <div class ="edit_column"> 
-                        <div class="btn-edit">
-                            <a href="views/Post-BookV2.ejs">
-                                <button class="btn book" > Edit</button>
-                            </a>
+                    <% }else{%>
+                        <div class="btn-edit" style = "text-align: center; width: 100%; margin-left: 110%;">
+                            <a class="btn btn-primary btn-lg" href="/edit/<%= PostBook._id %>"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-danger btn-lg" href="/delete/<%= PostBook._id %>"><i class="fa fa-trash"></i></a>
                         </div>
-                    </div> -->
-
+                    <% } %>
+                </div>                
+              
         </div>
-        <% })}else{ %>
+    </form>
+        <% }})}else{ %>
             <h3 style="text-align: center;">No Record Found</h3>
             <% } %>
         <!-- <div class ="post-bar">

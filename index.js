@@ -9,6 +9,7 @@ const AuthRoute = require('./routes/auth');
 const HomeRoute = require('./routes/home');
 const FeedRoute = require('./routes/feed');
 const ProfileRoute = require('./routes/profile');
+const PaypalRoute = require('./routes/paypal');
 
 const PORT=4000;
 const app = express(); /* Standard */
@@ -48,6 +49,8 @@ app.use('/', FeedRoute);
 
 app.use('/', ProfileRoute);
 
+app.use('/', PaypalRoute);
+
 ////////////////////////////////////////////////////
 
 app.listen(PORT, () => {
@@ -57,3 +60,4 @@ app.listen(PORT, () => {
       console.log(error);
     }
   })
+  
