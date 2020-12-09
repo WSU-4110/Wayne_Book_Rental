@@ -92,6 +92,23 @@ router.post("/update", authenticate, checkUser, function(req, res, next) {
         }
     })
 })
+
+router.post("/searchSubject", authenticate, checkUser, function (req, res, next) {
+    var subject = req.body.subject;
+
+    if (subject != '') {
+        var fltrParameter = { Subject: subject }
+    } else {
+        var fltrParameter = {}
+    }
+
+    PostBook.find(fltrParameter, function (err, data) {
+        res.render('feed', {
+            books: data
+        });
+    }).sort({ "_id": -1 })
+})
+
 router.get("/update", authenticate, checkUser, function (req, res, next) {
     //res.redirect('/post');
     var title = { Title: "New test"}
@@ -101,5 +118,7 @@ router.get("/update", authenticate, checkUser, function (req, res, next) {
         });
     })
   });
+
+
 
 module.exports = router;

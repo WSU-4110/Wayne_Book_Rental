@@ -42,6 +42,7 @@ h2{
   position: absolute; /*or fixed*/
   right: 270px;
 }
+
 /* Style the form - display items horizontally */
 .form-inline {
   display: flex;

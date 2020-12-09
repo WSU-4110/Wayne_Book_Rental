@@ -4,7 +4,7 @@
   "description": "1. MD Bakhtiar R Akhib\r  2. Jainil Patel\r  3. AK Patel\r  4. George Esho\r  5. Mohamad Jad Baltaji",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "nodemon ./index.js --exec"
   },
   "repository": {
@@ -38,6 +38,8 @@
     "sendgrid": "^5.2.3"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.6"
   }
 }

@@ -166,4 +166,18 @@ router.post("/rate", authenticate, checkUser, (req, res, next)=>{
 })
 
 
+router.get('/active/:id', authenticate, checkUser, function(req, res, next){
+    var id = req.params.id;
+
+    PostBook.findById(id, function(err, data){
+        if(err)console.log(err);
+        data.Rented = false;
+        console.log(data.Rented);
+        data.save();
+        console.log(data.Rented);
+        res.redirect('/profile');
+    })
+})
+
+
 module.exports = router;

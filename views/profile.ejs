@@ -150,12 +150,13 @@
                 </form>
                 
                 <div type='container'>
-                    <h2>Your listing</h2>
+                    <h2>Your Current Active listing</h2>
                     <section id="main-content">
                         <div id="book-feed" role="feed"></div>
                     </section>
                     <%if (books.length > 0){ %>
-                    <% books.forEach(function (PostBook) { %>
+                    <% books.forEach(function (PostBook) { 
+                        if (PostBook.Rented == false) {%>
                     <div class ="post-bar">
                         <div class="row">
                             <div class="column">
@@ -197,7 +198,7 @@
                                 </div>-->
             
                     </div>
-                    <% })}else{ %>
+                    <% }})}else{ %>
                         <h3 style="text-align: center;">No Record Found</h3>
                         <% } %>
 
@@ -207,12 +208,13 @@
                             Every other detail a book has works, maybe just need to add a "Date Rented" field under "Renting Price". 
                             Have to take off edit button for sure.-->
                     <div type='container'>
-                        <h2>Your purchase history</h2>
+                        <h2>Your Books Rented Out to others</h2>
                         <section id="main-content">
                             <div id="book-feed" role="feed"></div>
                         </section>
                         <%if (books.length > 0){ %>
-                        <% books.forEach(function (PostBook) { %>
+                        <% books.forEach(function (PostBook) { 
+                            if (PostBook.Rented == true) {%>
                         <div class ="post-bar">
                             <div class="row">
                                 <div class="column">
@@ -238,8 +240,8 @@
                                     <div class="btn-edit">
                                         <!-- <a class="btn book" href="/edit/<%= PostBook._id %>">Edit</a>  -->
                                         <!-- <a class="btn book" href="/delete/<%= PostBook._id %>" > Delete</a> -->
-                                        <a class="btn btn-primary btn-lg" href="/edit/<%= PostBook._id %>"><i class="fa fa-edit"></i></a>
-                                        <a class="btn btn-danger btn-lg" href="/delete/<%= PostBook._id %>"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-primary btn-lg" href="/active/<%= PostBook._id %>">Make book Active for Rent</a>
+                                        <!-- <a class="btn btn-danger btn-lg" href="/delete/<%= PostBook._id %>"><i class="fa fa-trash"></i></a> -->
                                     </div>
                                 </div>  
                                 
@@ -254,7 +256,7 @@
                                     </div>-->
                 
                         </div>
-                        <% })}else{ %>
+                        <% }})}else{ %>
                             <h3 style="text-align: center;">No Record Found</h3>
                             <% } %>
 
