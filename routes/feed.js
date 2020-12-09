@@ -54,6 +54,22 @@ router.post("/search", authenticate, checkUser, function (req, res, next) {
         });
     }).sort({ "_id": -1 })
 })
+
+router.post("/searchSubject", authenticate, checkUser, function (req, res, next) {
+    var subject = req.body.subject;
+
+    if (subject != '') {
+        var fltrParameter = { Subject: subject }
+    } else {
+        var fltrParameter = {}
+    }
+
+    PostBook.find(fltrParameter, function (err, data) {
+        res.render('feed', {
+            books: data
+        });
+    }).sort({ "_id": -1 })
+})
 router.post("/update", authenticate, checkUser, function(req, res, next) {
     var title = { Title: "Test"}
     var query = {
