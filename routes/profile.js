@@ -7,7 +7,7 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
 
-const SendgridApi = process.env.Sendgrid_Api;
+const SendgridApi = process.env.Sendgrid_Api3;
 sgMail.setApiKey(SendgridApi);
 
 const PostBook = require("../models/post.model");
@@ -127,6 +127,7 @@ router.post("/report", authenticate, checkUser, function (req, res, next) {
         if(err){
             console.log(err);
             return res.send(err);}
+        console.log(json);
         res.redirect('feed');
     })
 
