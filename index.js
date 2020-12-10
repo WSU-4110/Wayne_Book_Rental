@@ -34,6 +34,9 @@ var fs = require('fs');
 
 /////////// App caliing the routes//////////////////
 app.get("/", (req, res) =>{
+  // res.render('Log-in.ejs',{
+  //   passwordnotvalid: {'message': ''}
+  // })
   res.sendFile(__dirname + '/Log-in.html', 'utf8');
 })
 
