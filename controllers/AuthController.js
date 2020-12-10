@@ -62,15 +62,21 @@ const login = (req, res, next) => {
           console.log("Logged in successfully!");
           console.log(token);
         } else {
-          res.json({
-            message: "Password did not match!",
-          });
+          res.render('Log-in.ejs',{
+            passwordnotvalid: {'message': 'Password did not match!'}
+          })
+          // res.json({
+          //   message: "Password did not match!",
+          // });
         }
       });
     } else {
-      res.json({
-        message: "No user found!",
-      });
+      res.render('Log-in.ejs',{
+        passwordnotvalid: {'message': 'No user found!'}
+      })
+      // res.status(200).json({
+      //   message: "No user found!",
+      // });
     }
   });
 };
