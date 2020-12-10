@@ -10,7 +10,7 @@ form {
 
 body {                                    
  background-color: #556e3c;
- Background-image: url("images/oldmain.jpg");
+ Background-image: url("../images/oldmain.jpg");
  background-repeat: no-repeat;
  background-size: auto;
  background-position: center;
